@@ -1,13 +1,14 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @ObservedObject var session: AppSession
     @State private var selectedTab: AppTab = .home
 
     var body: some View {
         TabView(selection: $selectedTab) {
             ForEach(AppTab.allCases) { tab in
                 NavigationStack {
-                    tab.content
+                    tab.content(session: session)
                         .navigationTitle(tab.title)
                 }
                 .tabItem {
@@ -49,14 +50,15 @@ private enum AppTab: String, CaseIterable, Identifiable {
     }
 
     @ViewBuilder
-    var content: some View {
+    @MainActor
+    func content(session: AppSession) -> some View {
         switch self {
         case .home:
-            HomePlaceholderView()
+            HomeView(session: session)
         case .statistics:
-            StatisticsPlaceholderView()
+            StatisticsView(session: session)
         case .profile:
-            ProfilePlaceholderView()
+            ProfileView(session: session)
         }
     }
 
@@ -66,5 +68,5 @@ private enum AppTab: String, CaseIterable, Identifiable {
 }
 
 #Preview {
-    MainTabView()
+    MainTabView(session: AppSession())
 }

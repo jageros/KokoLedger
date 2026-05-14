@@ -26,12 +26,11 @@ final class BookServiceTests: XCTestCase {
 
     func testOwnerCanUpdateBook() async throws {
         let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
-        let book = try XCTUnwrap(
-            try await container.bookService.fetchBook(
-                id: MockSeedData.primaryBookId,
-                userId: MockSeedData.defaultUserId
-            )
+        let fetchedBook = try await container.bookService.fetchBook(
+            id: MockSeedData.primaryBookId,
+            userId: MockSeedData.defaultUserId
         )
+        let book = try XCTUnwrap(fetchedBook)
         let updated = Book(
             id: book.id,
             name: "更新后的账本",
@@ -50,12 +49,11 @@ final class BookServiceTests: XCTestCase {
 
     func testEditorCannotUpdateBookSettings() async throws {
         let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
-        let book = try XCTUnwrap(
-            try await container.bookService.fetchBook(
-                id: MockSeedData.primaryBookId,
-                userId: MockSeedData.editorUserId
-            )
+        let fetchedBook = try await container.bookService.fetchBook(
+            id: MockSeedData.primaryBookId,
+            userId: MockSeedData.editorUserId
         )
+        let book = try XCTUnwrap(fetchedBook)
 
         await XCTAssertThrowsErrorAsync {
             _ = try await container.bookService.updateBook(book, requestedBy: MockSeedData.editorUserId)
@@ -64,12 +62,11 @@ final class BookServiceTests: XCTestCase {
 
     func testReadonlyCannotUpdateBookSettings() async throws {
         let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
-        let book = try XCTUnwrap(
-            try await container.bookService.fetchBook(
-                id: MockSeedData.primaryBookId,
-                userId: MockSeedData.readonlyUserId
-            )
+        let fetchedBook = try await container.bookService.fetchBook(
+            id: MockSeedData.primaryBookId,
+            userId: MockSeedData.readonlyUserId
         )
+        let book = try XCTUnwrap(fetchedBook)
 
         await XCTAssertThrowsErrorAsync {
             _ = try await container.bookService.updateBook(book, requestedBy: MockSeedData.readonlyUserId)

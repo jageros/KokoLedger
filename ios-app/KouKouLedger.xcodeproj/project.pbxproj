@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		039FCF47FA8714EFAE53B38F /* HomeSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44F3E90D0522E07D5629025 /* HomeSummaryCard.swift */; };
+		06CB1EFD9F191AD8B8DB7D8B /* AmountInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793F6CCDC837B04AF9A84F4 /* AmountInputView.swift */; };
+		0A9304F6219F03E84FC6EBF8 /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907ED7283873E1E8B09E2A3 /* AddTransactionView.swift */; };
+		1CC6A897A9EB5A73A7E59823 /* TransactionFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E449CF5339BE2DB72A657AD /* TransactionFormViewModel.swift */; };
+		1F5FACCE9C44DB7C891138E2 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F621602E0E6F945B8F73EE /* TransactionDetailView.swift */; };
+		2940F7C83164915EB25C3BA2 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054E858F0F0A8C5426FB2EBE /* CategoryPickerView.swift */; };
+		2C4E5D98C37D8EBB566E80D9 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89962D2BE19E9088FB9FD250 /* TransactionRowView.swift */; };
+		611D7D4B1A279FE98754431A /* TransactionFormViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D3C1E2C4462A33F61114C8 /* TransactionFormViewModelTests.swift */; };
+		900202A77D0B29580CC63983 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DEB910A94494562EC26962 /* HomeView.swift */; };
 		A10000000000000000000020 /* KouKouLedgerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000010 /* KouKouLedgerApp.swift */; };
 		A10000000000000000000021 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* RootView.swift */; };
 		A10000000000000000000022 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* MainTabView.swift */; };
@@ -16,6 +25,7 @@
 		A10000000000000000000026 /* PlaceholderPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* PlaceholderPageView.swift */; };
 		A10000000000000000000027 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000017 /* AppTheme.swift */; };
 		A10000000000000000000028 /* AppAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000018 /* AppAnimation.swift */; };
+		AB445770610D075003D272AD /* TransactionFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378672D7205B9DAA42C73CB7 /* TransactionFormView.swift */; };
 		B10000000000000000000001 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000101 /* User.swift */; };
 		B10000000000000000000002 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000102 /* Book.swift */; };
 		B10000000000000000000003 /* BookMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000103 /* BookMember.swift */; };
@@ -35,6 +45,7 @@
 		B10000000000000000000011 /* TrendPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000111 /* TrendPoint.swift */; };
 		B10000000000000000000012 /* CategoryRatioSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000112 /* CategoryRatioSlice.swift */; };
 		B10000000000000000000013 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000113 /* AppError.swift */; };
+		B9CA002B23B35F57E78461AA /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327ACD94C2F47FF925D0D219 /* EditTransactionView.swift */; };
 		C10000000000000000000001 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000101 /* DateUtils.swift */; };
 		C10000000000000000000002 /* MoneyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000102 /* MoneyFormatter.swift */; };
 		C10000000000000000000003 /* PercentFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10000000000000000000103 /* PercentFormatter.swift */; };
@@ -48,6 +59,87 @@
 		D10000000000000000000004 /* PermissionGuardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10000000000000000000104 /* PermissionGuardTests.swift */; };
 		D10000000000000000000005 /* CategoryRulesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10000000000000000000105 /* CategoryRulesTests.swift */; };
 		D10000000000000000000006 /* LedgerCalculationUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10000000000000000000106 /* LedgerCalculationUtilsTests.swift */; };
+		E50000000000000000000001 /* AuthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000001 /* AuthServiceTests.swift */; };
+		E50000000000000000000002 /* BookInviteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000002 /* BookInviteServiceTests.swift */; };
+		E50000000000000000000003 /* BookMemberServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000003 /* BookMemberServiceTests.swift */; };
+		E50000000000000000000004 /* BookServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000004 /* BookServiceTests.swift */; };
+		E50000000000000000000005 /* CategoryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000005 /* CategoryServiceTests.swift */; };
+		E50000000000000000000006 /* ServiceTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000006 /* ServiceTestSupport.swift */; };
+		E50000000000000000000007 /* StatisticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000007 /* StatisticsServiceTests.swift */; };
+		E50000000000000000000008 /* TransactionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000008 /* TransactionServiceTests.swift */; };
+		E50000000000000000000009 /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40000000000000000000009 /* AuthViewModelTests.swift */; };
+		E5000000000000000000000A /* BookViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4000000000000000000000A /* BookViewModelTests.swift */; };
+		E5000000000000000000000B /* MembersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4000000000000000000000B /* MembersViewModelTests.swift */; };
+		E5000000000000000000000C /* CategoryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4000000000000000000000C /* CategoryViewModelTests.swift */; };
+		EEC161B30A67E1CE19E65B94 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3205D8E9D763A376EAF78F /* TransactionListView.swift */; };
+		F2F57C3861CDD86F4049F3B5 /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BCD844E237A8B3340C5890 /* HomeViewModelTests.swift */; };
+		F50000000000000000000001 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000001 /* AppSession.swift */; };
+		F50000000000000000000002 /* AppDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000002 /* AppDependencyContainer.swift */; };
+		F50000000000000000000003 /* ServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000003 /* ServiceProtocols.swift */; };
+		F50000000000000000000004 /* MockServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000004 /* MockServices.swift */; };
+		F50000000000000000000005 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000005 /* Repositories.swift */; };
+		F50000000000000000000006 /* MockSeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000006 /* MockSeedData.swift */; };
+		F50000000000000000000007 /* MockDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000007 /* MockDataStore.swift */; };
+		F50000000000000000000008 /* AppButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000008 /* AppButton.swift */; };
+		F50000000000000000000009 /* AppTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000009 /* AppTextField.swift */; };
+		F5000000000000000000000A /* AppSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000000A /* AppSecureField.swift */; };
+		F5000000000000000000000B /* AppCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000000B /* AppCard.swift */; };
+		F5000000000000000000000C /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000000C /* EmptyStateView.swift */; };
+		F5000000000000000000000D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000000D /* LoadingView.swift */; };
+		F5000000000000000000000E /* PermissionBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000000E /* PermissionBadge.swift */; };
+		F5000000000000000000000F /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000000F /* SectionHeaderView.swift */; };
+		F50000000000000000000010 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000010 /* AuthViewModel.swift */; };
+		F50000000000000000000011 /* AuthFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000011 /* AuthFlowView.swift */; };
+		F50000000000000000000012 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000012 /* LoginView.swift */; };
+		F50000000000000000000013 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000013 /* RegisterView.swift */; };
+		F50000000000000000000014 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000014 /* ProfileViewModel.swift */; };
+		F50000000000000000000015 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000015 /* ProfileView.swift */; };
+		F50000000000000000000016 /* LedgerSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000016 /* LedgerSummaryCard.swift */; };
+		F50000000000000000000017 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000017 /* BookViewModel.swift */; };
+		F50000000000000000000018 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000018 /* BookListView.swift */; };
+		F50000000000000000000019 /* CreateBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000019 /* CreateBookView.swift */; };
+		F5000000000000000000001A /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000001A /* EditBookView.swift */; };
+		F5000000000000000000001B /* BookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000001B /* BookDetailView.swift */; };
+		F5000000000000000000001C /* BookSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000001C /* BookSwitcherView.swift */; };
+		F5000000000000000000001D /* MembersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000001D /* MembersViewModel.swift */; };
+		F5000000000000000000001E /* BookMembersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000001E /* BookMembersView.swift */; };
+		F5000000000000000000001F /* InviteMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4000000000000000000001F /* InviteMemberView.swift */; };
+		F50000000000000000000020 /* AcceptInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000020 /* AcceptInviteView.swift */; };
+		F50000000000000000000021 /* PermissionEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000021 /* PermissionEditView.swift */; };
+		F50000000000000000000022 /* MemberRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000022 /* MemberRowView.swift */; };
+		F50000000000000000000023 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000023 /* CategoryViewModel.swift */; };
+		F50000000000000000000024 /* CategoryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000024 /* CategoryManagementView.swift */; };
+		F50000000000000000000025 /* CategoryTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000025 /* CategoryTreeView.swift */; };
+		F50000000000000000000026 /* CategoryEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40000000000000000000026 /* CategoryEditView.swift */; };
+		F60000000000000000000001 /* StatisticsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60000000000000000000101 /* StatisticsViewModelTests.swift */; };
+		F61000000000000000000001 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000101 /* StatisticsViewModel.swift */; };
+		F61000000000000000000002 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000102 /* StatisticsView.swift */; };
+		F61000000000000000000003 /* StatisticsScopePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000103 /* StatisticsScopePicker.swift */; };
+		F61000000000000000000004 /* NetAssetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000104 /* NetAssetCard.swift */; };
+		F61000000000000000000005 /* DailyAverageCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000105 /* DailyAverageCard.swift */; };
+		F61000000000000000000006 /* IncomeExpenseTrendChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000106 /* IncomeExpenseTrendChartView.swift */; };
+		F61000000000000000000007 /* ChartDisplayTypeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000107 /* ChartDisplayTypeToggle.swift */; };
+		F61000000000000000000008 /* CategoryRatioPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000108 /* CategoryRatioPieChartView.swift */; };
+		F61000000000000000000009 /* CategoryRatioControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61000000000000000000109 /* CategoryRatioControls.swift */; };
+		F6100000000000000000000A /* StatDeltaBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6100000000000000000010A /* StatDeltaBadge.swift */; };
+		F70000000000000000000001 /* InfrastructureReservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70000000000000000000101 /* InfrastructureReservationTests.swift */; };
+		F71000000000000000000001 /* BackendMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000101 /* BackendMode.swift */; };
+		F71000000000000000000002 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000102 /* APIError.swift */; };
+		F71000000000000000000003 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000103 /* APIEndpoint.swift */; };
+		F71000000000000000000004 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000104 /* APIClient.swift */; };
+		F71000000000000000000005 /* AuthTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000105 /* AuthTokenStore.swift */; };
+		F71000000000000000000006 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000106 /* KeychainService.swift */; };
+		F71000000000000000000007 /* SwiftDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000107 /* SwiftDataStack.swift */; };
+		F71000000000000000000008 /* LocalCacheServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000108 /* LocalCacheServiceProtocol.swift */; };
+		F71000000000000000000009 /* SwiftDataLocalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000109 /* SwiftDataLocalCacheService.swift */; };
+		F7100000000000000000000A /* RemoteAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7100000000000000000010A /* RemoteAuthService.swift */; };
+		F7100000000000000000000B /* RemoteBookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7100000000000000000010B /* RemoteBookService.swift */; };
+		F7100000000000000000000C /* RemoteBookMemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7100000000000000000010C /* RemoteBookMemberService.swift */; };
+		F7100000000000000000000D /* RemoteBookInviteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7100000000000000000010D /* RemoteBookInviteService.swift */; };
+		F7100000000000000000000E /* RemoteCategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7100000000000000000010E /* RemoteCategoryService.swift */; };
+		F7100000000000000000000F /* RemoteTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7100000000000000000010F /* RemoteTransactionService.swift */; };
+		F71000000000000000000010 /* RemoteStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71000000000000000000110 /* RemoteStatisticsService.swift */; };
+		FBDE57EDCC0F092009CAE27A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6606A4A62A0F6512CDFEE6 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +153,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		054E858F0F0A8C5426FB2EBE /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
+		0793F6CCDC837B04AF9A84F4 /* AmountInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountInputView.swift; sourceTree = "<group>"; };
+		0E449CF5339BE2DB72A657AD /* TransactionFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormViewModel.swift; sourceTree = "<group>"; };
+		1E6606A4A62A0F6512CDFEE6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		27F621602E0E6F945B8F73EE /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
+		327ACD94C2F47FF925D0D219 /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
+		378672D7205B9DAA42C73CB7 /* TransactionFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormView.swift; sourceTree = "<group>"; };
+		55BCD844E237A8B3340C5890 /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
+		78D3C1E2C4462A33F61114C8 /* TransactionFormViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormViewModelTests.swift; sourceTree = "<group>"; };
+		89962D2BE19E9088FB9FD250 /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
+		9907ED7283873E1E8B09E2A3 /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		A10000000000000000000002 /* KouKouLedger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KouKouLedger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10000000000000000000010 /* KouKouLedgerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KouKouLedgerApp.swift; sourceTree = "<group>"; };
 		A10000000000000000000011 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -90,6 +193,8 @@
 		B10000000000000000000111 /* TrendPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendPoint.swift; sourceTree = "<group>"; };
 		B10000000000000000000112 /* CategoryRatioSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRatioSlice.swift; sourceTree = "<group>"; };
 		B10000000000000000000113 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		B44F3E90D0522E07D5629025 /* HomeSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSummaryCard.swift; sourceTree = "<group>"; };
+		B9DEB910A94494562EC26962 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C10000000000000000000101 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		C10000000000000000000102 /* MoneyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyFormatter.swift; sourceTree = "<group>"; };
 		C10000000000000000000103 /* PercentFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentFormatter.swift; sourceTree = "<group>"; };
@@ -104,6 +209,85 @@
 		D10000000000000000000105 /* CategoryRulesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRulesTests.swift; sourceTree = "<group>"; };
 		D10000000000000000000106 /* LedgerCalculationUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerCalculationUtilsTests.swift; sourceTree = "<group>"; };
 		D10000000000000000000200 /* KouKouLedgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KouKouLedgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3205D8E9D763A376EAF78F /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
+		E40000000000000000000001 /* AuthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000002 /* BookInviteServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInviteServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000003 /* BookMemberServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMemberServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000004 /* BookServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000005 /* CategoryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000006 /* ServiceTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTestSupport.swift; sourceTree = "<group>"; };
+		E40000000000000000000007 /* StatisticsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000008 /* TransactionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionServiceTests.swift; sourceTree = "<group>"; };
+		E40000000000000000000009 /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
+		E4000000000000000000000A /* BookViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModelTests.swift; sourceTree = "<group>"; };
+		E4000000000000000000000B /* MembersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModelTests.swift; sourceTree = "<group>"; };
+		E4000000000000000000000C /* CategoryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModelTests.swift; sourceTree = "<group>"; };
+		F40000000000000000000001 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
+		F40000000000000000000002 /* AppDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencyContainer.swift; sourceTree = "<group>"; };
+		F40000000000000000000003 /* ServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocols.swift; sourceTree = "<group>"; };
+		F40000000000000000000004 /* MockServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServices.swift; sourceTree = "<group>"; };
+		F40000000000000000000005 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
+		F40000000000000000000006 /* MockSeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSeedData.swift; sourceTree = "<group>"; };
+		F40000000000000000000007 /* MockDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataStore.swift; sourceTree = "<group>"; };
+		F40000000000000000000008 /* AppButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButton.swift; sourceTree = "<group>"; };
+		F40000000000000000000009 /* AppTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTextField.swift; sourceTree = "<group>"; };
+		F4000000000000000000000A /* AppSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSecureField.swift; sourceTree = "<group>"; };
+		F4000000000000000000000B /* AppCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCard.swift; sourceTree = "<group>"; };
+		F4000000000000000000000C /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		F4000000000000000000000D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		F4000000000000000000000E /* PermissionBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionBadge.swift; sourceTree = "<group>"; };
+		F4000000000000000000000F /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		F40000000000000000000010 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		F40000000000000000000011 /* AuthFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowView.swift; sourceTree = "<group>"; };
+		F40000000000000000000012 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F40000000000000000000013 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		F40000000000000000000014 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		F40000000000000000000015 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F40000000000000000000016 /* LedgerSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedgerSummaryCard.swift; sourceTree = "<group>"; };
+		F40000000000000000000017 /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
+		F40000000000000000000018 /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
+		F40000000000000000000019 /* CreateBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBookView.swift; sourceTree = "<group>"; };
+		F4000000000000000000001A /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
+		F4000000000000000000001B /* BookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailView.swift; sourceTree = "<group>"; };
+		F4000000000000000000001C /* BookSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSwitcherView.swift; sourceTree = "<group>"; };
+		F4000000000000000000001D /* MembersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersViewModel.swift; sourceTree = "<group>"; };
+		F4000000000000000000001E /* BookMembersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMembersView.swift; sourceTree = "<group>"; };
+		F4000000000000000000001F /* InviteMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMemberView.swift; sourceTree = "<group>"; };
+		F40000000000000000000020 /* AcceptInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInviteView.swift; sourceTree = "<group>"; };
+		F40000000000000000000021 /* PermissionEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionEditView.swift; sourceTree = "<group>"; };
+		F40000000000000000000022 /* MemberRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRowView.swift; sourceTree = "<group>"; };
+		F40000000000000000000023 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		F40000000000000000000024 /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
+		F40000000000000000000025 /* CategoryTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTreeView.swift; sourceTree = "<group>"; };
+		F40000000000000000000026 /* CategoryEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditView.swift; sourceTree = "<group>"; };
+		F60000000000000000000101 /* StatisticsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModelTests.swift; sourceTree = "<group>"; };
+		F61000000000000000000101 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		F61000000000000000000102 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		F61000000000000000000103 /* StatisticsScopePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScopePicker.swift; sourceTree = "<group>"; };
+		F61000000000000000000104 /* NetAssetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetAssetCard.swift; sourceTree = "<group>"; };
+		F61000000000000000000105 /* DailyAverageCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyAverageCard.swift; sourceTree = "<group>"; };
+		F61000000000000000000106 /* IncomeExpenseTrendChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeExpenseTrendChartView.swift; sourceTree = "<group>"; };
+		F61000000000000000000107 /* ChartDisplayTypeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDisplayTypeToggle.swift; sourceTree = "<group>"; };
+		F61000000000000000000108 /* CategoryRatioPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRatioPieChartView.swift; sourceTree = "<group>"; };
+		F61000000000000000000109 /* CategoryRatioControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRatioControls.swift; sourceTree = "<group>"; };
+		F6100000000000000000010A /* StatDeltaBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatDeltaBadge.swift; sourceTree = "<group>"; };
+		F70000000000000000000101 /* InfrastructureReservationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureReservationTests.swift; sourceTree = "<group>"; };
+		F71000000000000000000101 /* BackendMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendMode.swift; sourceTree = "<group>"; };
+		F71000000000000000000102 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		F71000000000000000000103 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		F71000000000000000000104 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		F71000000000000000000105 /* AuthTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTokenStore.swift; sourceTree = "<group>"; };
+		F71000000000000000000106 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		F71000000000000000000107 /* SwiftDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataStack.swift; sourceTree = "<group>"; };
+		F71000000000000000000108 /* LocalCacheServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCacheServiceProtocol.swift; sourceTree = "<group>"; };
+		F71000000000000000000109 /* SwiftDataLocalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataLocalCacheService.swift; sourceTree = "<group>"; };
+		F7100000000000000000010A /* RemoteAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthService.swift; sourceTree = "<group>"; };
+		F7100000000000000000010B /* RemoteBookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBookService.swift; sourceTree = "<group>"; };
+		F7100000000000000000010C /* RemoteBookMemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBookMemberService.swift; sourceTree = "<group>"; };
+		F7100000000000000000010D /* RemoteBookInviteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBookInviteService.swift; sourceTree = "<group>"; };
+		F7100000000000000000010E /* RemoteCategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCategoryService.swift; sourceTree = "<group>"; };
+		F7100000000000000000010F /* RemoteTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTransactionService.swift; sourceTree = "<group>"; };
+		F71000000000000000000110 /* RemoteStatisticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStatisticsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +337,7 @@
 				A10000000000000000000010 /* KouKouLedgerApp.swift */,
 				A10000000000000000000011 /* RootView.swift */,
 				A10000000000000000000012 /* MainTabView.swift */,
+				F40000000000000000000001 /* AppSession.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -167,6 +352,7 @@
 				A10000000000000000000057 /* Networking */,
 				A10000000000000000000058 /* Security */,
 				A10000000000000000000059 /* Utils */,
+				F40000000000000000000002 /* AppDependencyContainer.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -201,6 +387,8 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000053 /* Mock */,
+				F71000000000000000000200 /* Remote */,
+				F40000000000000000000003 /* ServiceProtocols.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -208,6 +396,7 @@
 		A10000000000000000000053 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				F40000000000000000000004 /* MockServices.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -215,6 +404,7 @@
 		A10000000000000000000055 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				F40000000000000000000005 /* Repositories.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -222,6 +412,11 @@
 		A10000000000000000000056 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				F71000000000000000000108 /* LocalCacheServiceProtocol.swift */,
+				F40000000000000000000006 /* MockSeedData.swift */,
+				F40000000000000000000007 /* MockDataStore.swift */,
+				F71000000000000000000107 /* SwiftDataStack.swift */,
+				F71000000000000000000109 /* SwiftDataLocalCacheService.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -229,6 +424,10 @@
 		A10000000000000000000057 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				F71000000000000000000104 /* APIClient.swift */,
+				F71000000000000000000103 /* APIEndpoint.swift */,
+				F71000000000000000000102 /* APIError.swift */,
+				F71000000000000000000101 /* BackendMode.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -236,6 +435,8 @@
 		A10000000000000000000058 /* Security */ = {
 			isa = PBXGroup;
 			children = (
+				F71000000000000000000105 /* AuthTokenStore.swift */,
+				F71000000000000000000106 /* KeychainService.swift */,
 				C10000000000000000000105 /* PermissionGuard.swift */,
 			);
 			path = Security;
@@ -272,6 +473,10 @@
 		A10000000000000000000071 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				F40000000000000000000010 /* AuthViewModel.swift */,
+				F40000000000000000000011 /* AuthFlowView.swift */,
+				F40000000000000000000012 /* LoginView.swift */,
+				F40000000000000000000013 /* RegisterView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -280,6 +485,9 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000013 /* HomePlaceholderView.swift */,
+				1E6606A4A62A0F6512CDFEE6 /* HomeViewModel.swift */,
+				B44F3E90D0522E07D5629025 /* HomeSummaryCard.swift */,
+				B9DEB910A94494562EC26962 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -288,6 +496,16 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000014 /* StatisticsPlaceholderView.swift */,
+				F61000000000000000000101 /* StatisticsViewModel.swift */,
+				F61000000000000000000102 /* StatisticsView.swift */,
+				F61000000000000000000103 /* StatisticsScopePicker.swift */,
+				F61000000000000000000104 /* NetAssetCard.swift */,
+				F61000000000000000000105 /* DailyAverageCard.swift */,
+				F61000000000000000000106 /* IncomeExpenseTrendChartView.swift */,
+				F61000000000000000000107 /* ChartDisplayTypeToggle.swift */,
+				F61000000000000000000108 /* CategoryRatioPieChartView.swift */,
+				F61000000000000000000109 /* CategoryRatioControls.swift */,
+				F6100000000000000000010A /* StatDeltaBadge.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -296,6 +514,9 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000015 /* ProfilePlaceholderView.swift */,
+				F40000000000000000000014 /* ProfileViewModel.swift */,
+				F40000000000000000000015 /* ProfileView.swift */,
+				F40000000000000000000016 /* LedgerSummaryCard.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -303,6 +524,12 @@
 		A10000000000000000000075 /* Book */ = {
 			isa = PBXGroup;
 			children = (
+				F40000000000000000000017 /* BookViewModel.swift */,
+				F40000000000000000000018 /* BookListView.swift */,
+				F40000000000000000000019 /* CreateBookView.swift */,
+				F4000000000000000000001A /* EditBookView.swift */,
+				F4000000000000000000001B /* BookDetailView.swift */,
+				F4000000000000000000001C /* BookSwitcherView.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -310,6 +537,12 @@
 		A10000000000000000000076 /* Members */ = {
 			isa = PBXGroup;
 			children = (
+				F4000000000000000000001D /* MembersViewModel.swift */,
+				F4000000000000000000001E /* BookMembersView.swift */,
+				F4000000000000000000001F /* InviteMemberView.swift */,
+				F40000000000000000000020 /* AcceptInviteView.swift */,
+				F40000000000000000000021 /* PermissionEditView.swift */,
+				F40000000000000000000022 /* MemberRowView.swift */,
 			);
 			path = Members;
 			sourceTree = "<group>";
@@ -317,6 +550,15 @@
 		A10000000000000000000077 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
+				0E449CF5339BE2DB72A657AD /* TransactionFormViewModel.swift */,
+				0793F6CCDC837B04AF9A84F4 /* AmountInputView.swift */,
+				054E858F0F0A8C5426FB2EBE /* CategoryPickerView.swift */,
+				378672D7205B9DAA42C73CB7 /* TransactionFormView.swift */,
+				9907ED7283873E1E8B09E2A3 /* AddTransactionView.swift */,
+				327ACD94C2F47FF925D0D219 /* EditTransactionView.swift */,
+				27F621602E0E6F945B8F73EE /* TransactionDetailView.swift */,
+				89962D2BE19E9088FB9FD250 /* TransactionRowView.swift */,
+				DE3205D8E9D763A376EAF78F /* TransactionListView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -324,6 +566,10 @@
 		A10000000000000000000078 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				F40000000000000000000023 /* CategoryViewModel.swift */,
+				F40000000000000000000024 /* CategoryManagementView.swift */,
+				F40000000000000000000025 /* CategoryTreeView.swift */,
+				F40000000000000000000026 /* CategoryEditView.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -342,6 +588,14 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000016 /* PlaceholderPageView.swift */,
+				F40000000000000000000008 /* AppButton.swift */,
+				F40000000000000000000009 /* AppTextField.swift */,
+				F4000000000000000000000A /* AppSecureField.swift */,
+				F4000000000000000000000B /* AppCard.swift */,
+				F4000000000000000000000C /* EmptyStateView.swift */,
+				F4000000000000000000000D /* LoadingView.swift */,
+				F4000000000000000000000E /* PermissionBadge.swift */,
+				F4000000000000000000000F /* SectionHeaderView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -385,8 +639,38 @@
 				D10000000000000000000104 /* PermissionGuardTests.swift */,
 				D10000000000000000000105 /* CategoryRulesTests.swift */,
 				D10000000000000000000106 /* LedgerCalculationUtilsTests.swift */,
+				E40000000000000000000001 /* AuthServiceTests.swift */,
+				E40000000000000000000002 /* BookInviteServiceTests.swift */,
+				E40000000000000000000003 /* BookMemberServiceTests.swift */,
+				E40000000000000000000004 /* BookServiceTests.swift */,
+				E40000000000000000000005 /* CategoryServiceTests.swift */,
+				E40000000000000000000006 /* ServiceTestSupport.swift */,
+				E40000000000000000000007 /* StatisticsServiceTests.swift */,
+				E40000000000000000000008 /* TransactionServiceTests.swift */,
+				E40000000000000000000009 /* AuthViewModelTests.swift */,
+				E4000000000000000000000A /* BookViewModelTests.swift */,
+				E4000000000000000000000B /* MembersViewModelTests.swift */,
+				E4000000000000000000000C /* CategoryViewModelTests.swift */,
+				55BCD844E237A8B3340C5890 /* HomeViewModelTests.swift */,
+				78D3C1E2C4462A33F61114C8 /* TransactionFormViewModelTests.swift */,
+				F60000000000000000000101 /* StatisticsViewModelTests.swift */,
+				F70000000000000000000101 /* InfrastructureReservationTests.swift */,
 			);
 			path = KouKouLedgerTests;
+			sourceTree = "<group>";
+		};
+		F71000000000000000000200 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				F7100000000000000000010A /* RemoteAuthService.swift */,
+				F7100000000000000000010B /* RemoteBookService.swift */,
+				F7100000000000000000010C /* RemoteBookMemberService.swift */,
+				F7100000000000000000010D /* RemoteBookInviteService.swift */,
+				F7100000000000000000010E /* RemoteCategoryService.swift */,
+				F7100000000000000000010F /* RemoteTransactionService.swift */,
+				F71000000000000000000110 /* RemoteStatisticsService.swift */,
+			);
+			path = Remote;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,6 +799,22 @@
 				B10000000000000000000011 /* TrendPoint.swift in Sources */,
 				B10000000000000000000012 /* CategoryRatioSlice.swift in Sources */,
 				B10000000000000000000013 /* AppError.swift in Sources */,
+				F71000000000000000000001 /* BackendMode.swift in Sources */,
+				F71000000000000000000002 /* APIError.swift in Sources */,
+				F71000000000000000000003 /* APIEndpoint.swift in Sources */,
+				F71000000000000000000004 /* APIClient.swift in Sources */,
+				F71000000000000000000005 /* AuthTokenStore.swift in Sources */,
+				F71000000000000000000006 /* KeychainService.swift in Sources */,
+				F71000000000000000000007 /* SwiftDataStack.swift in Sources */,
+				F71000000000000000000008 /* LocalCacheServiceProtocol.swift in Sources */,
+				F71000000000000000000009 /* SwiftDataLocalCacheService.swift in Sources */,
+				F7100000000000000000000A /* RemoteAuthService.swift in Sources */,
+				F7100000000000000000000B /* RemoteBookService.swift in Sources */,
+				F7100000000000000000000C /* RemoteBookMemberService.swift in Sources */,
+				F7100000000000000000000D /* RemoteBookInviteService.swift in Sources */,
+				F7100000000000000000000E /* RemoteCategoryService.swift in Sources */,
+				F7100000000000000000000F /* RemoteTransactionService.swift in Sources */,
+				F71000000000000000000010 /* RemoteStatisticsService.swift in Sources */,
 				C10000000000000000000001 /* DateUtils.swift in Sources */,
 				C10000000000000000000002 /* MoneyFormatter.swift in Sources */,
 				C10000000000000000000003 /* PercentFormatter.swift in Sources */,
@@ -522,6 +822,66 @@
 				C10000000000000000000005 /* PermissionGuard.swift in Sources */,
 				C10000000000000000000006 /* CategoryRules.swift in Sources */,
 				C10000000000000000000007 /* LedgerCalculationUtils.swift in Sources */,
+				F50000000000000000000001 /* AppSession.swift in Sources */,
+				F50000000000000000000002 /* AppDependencyContainer.swift in Sources */,
+				F50000000000000000000003 /* ServiceProtocols.swift in Sources */,
+				F50000000000000000000004 /* MockServices.swift in Sources */,
+				F50000000000000000000005 /* Repositories.swift in Sources */,
+				F50000000000000000000006 /* MockSeedData.swift in Sources */,
+				F50000000000000000000007 /* MockDataStore.swift in Sources */,
+				F50000000000000000000008 /* AppButton.swift in Sources */,
+				F50000000000000000000009 /* AppTextField.swift in Sources */,
+				F5000000000000000000000A /* AppSecureField.swift in Sources */,
+				F5000000000000000000000B /* AppCard.swift in Sources */,
+				F5000000000000000000000C /* EmptyStateView.swift in Sources */,
+				F5000000000000000000000D /* LoadingView.swift in Sources */,
+				F5000000000000000000000E /* PermissionBadge.swift in Sources */,
+				F5000000000000000000000F /* SectionHeaderView.swift in Sources */,
+				F50000000000000000000010 /* AuthViewModel.swift in Sources */,
+				F50000000000000000000011 /* AuthFlowView.swift in Sources */,
+				F50000000000000000000012 /* LoginView.swift in Sources */,
+				F50000000000000000000013 /* RegisterView.swift in Sources */,
+				F50000000000000000000014 /* ProfileViewModel.swift in Sources */,
+				F50000000000000000000015 /* ProfileView.swift in Sources */,
+				F50000000000000000000016 /* LedgerSummaryCard.swift in Sources */,
+				F50000000000000000000017 /* BookViewModel.swift in Sources */,
+				F50000000000000000000018 /* BookListView.swift in Sources */,
+				F50000000000000000000019 /* CreateBookView.swift in Sources */,
+				F5000000000000000000001A /* EditBookView.swift in Sources */,
+				F5000000000000000000001B /* BookDetailView.swift in Sources */,
+				F5000000000000000000001C /* BookSwitcherView.swift in Sources */,
+				F5000000000000000000001D /* MembersViewModel.swift in Sources */,
+				F5000000000000000000001E /* BookMembersView.swift in Sources */,
+				F5000000000000000000001F /* InviteMemberView.swift in Sources */,
+				F50000000000000000000020 /* AcceptInviteView.swift in Sources */,
+				F50000000000000000000021 /* PermissionEditView.swift in Sources */,
+				F50000000000000000000022 /* MemberRowView.swift in Sources */,
+				F50000000000000000000023 /* CategoryViewModel.swift in Sources */,
+				F50000000000000000000024 /* CategoryManagementView.swift in Sources */,
+				F50000000000000000000025 /* CategoryTreeView.swift in Sources */,
+				F50000000000000000000026 /* CategoryEditView.swift in Sources */,
+				F61000000000000000000001 /* StatisticsViewModel.swift in Sources */,
+				F61000000000000000000002 /* StatisticsView.swift in Sources */,
+				F61000000000000000000003 /* StatisticsScopePicker.swift in Sources */,
+				F61000000000000000000004 /* NetAssetCard.swift in Sources */,
+				F61000000000000000000005 /* DailyAverageCard.swift in Sources */,
+				F61000000000000000000006 /* IncomeExpenseTrendChartView.swift in Sources */,
+				F61000000000000000000007 /* ChartDisplayTypeToggle.swift in Sources */,
+				F61000000000000000000008 /* CategoryRatioPieChartView.swift in Sources */,
+				F61000000000000000000009 /* CategoryRatioControls.swift in Sources */,
+				F6100000000000000000000A /* StatDeltaBadge.swift in Sources */,
+				FBDE57EDCC0F092009CAE27A /* HomeViewModel.swift in Sources */,
+				039FCF47FA8714EFAE53B38F /* HomeSummaryCard.swift in Sources */,
+				900202A77D0B29580CC63983 /* HomeView.swift in Sources */,
+				1CC6A897A9EB5A73A7E59823 /* TransactionFormViewModel.swift in Sources */,
+				06CB1EFD9F191AD8B8DB7D8B /* AmountInputView.swift in Sources */,
+				2940F7C83164915EB25C3BA2 /* CategoryPickerView.swift in Sources */,
+				AB445770610D075003D272AD /* TransactionFormView.swift in Sources */,
+				0A9304F6219F03E84FC6EBF8 /* AddTransactionView.swift in Sources */,
+				B9CA002B23B35F57E78461AA /* EditTransactionView.swift in Sources */,
+				1F5FACCE9C44DB7C891138E2 /* TransactionDetailView.swift in Sources */,
+				2C4E5D98C37D8EBB566E80D9 /* TransactionRowView.swift in Sources */,
+				EEC161B30A67E1CE19E65B94 /* TransactionListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +895,22 @@
 				D10000000000000000000004 /* PermissionGuardTests.swift in Sources */,
 				D10000000000000000000005 /* CategoryRulesTests.swift in Sources */,
 				D10000000000000000000006 /* LedgerCalculationUtilsTests.swift in Sources */,
+				E50000000000000000000001 /* AuthServiceTests.swift in Sources */,
+				E50000000000000000000002 /* BookInviteServiceTests.swift in Sources */,
+				E50000000000000000000003 /* BookMemberServiceTests.swift in Sources */,
+				E50000000000000000000004 /* BookServiceTests.swift in Sources */,
+				E50000000000000000000005 /* CategoryServiceTests.swift in Sources */,
+				E50000000000000000000006 /* ServiceTestSupport.swift in Sources */,
+				E50000000000000000000007 /* StatisticsServiceTests.swift in Sources */,
+				E50000000000000000000008 /* TransactionServiceTests.swift in Sources */,
+				E50000000000000000000009 /* AuthViewModelTests.swift in Sources */,
+				E5000000000000000000000A /* BookViewModelTests.swift in Sources */,
+				E5000000000000000000000B /* MembersViewModelTests.swift in Sources */,
+				E5000000000000000000000C /* CategoryViewModelTests.swift in Sources */,
+				F2F57C3861CDD86F4049F3B5 /* HomeViewModelTests.swift in Sources */,
+				611D7D4B1A279FE98754431A /* TransactionFormViewModelTests.swift in Sources */,
+				F60000000000000000000001 /* StatisticsViewModelTests.swift in Sources */,
+				F70000000000000000000001 /* InfrastructureReservationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +1050,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = CUMDF377JK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "抠抠记账";
@@ -697,6 +1074,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = CUMDF377JK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "抠抠记账";

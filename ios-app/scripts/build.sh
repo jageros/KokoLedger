@@ -6,6 +6,8 @@ PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 PROJECT_PATH="${PROJECT_DIR}/KouKouLedger.xcodeproj"
 SCHEME="KouKouLedger"
 
+echo "==> KouKouLedger clean build"
+
 if ! xcodebuild -version >/dev/null 2>&1; then
     if [ -d "/Applications/Xcode.app/Contents/Developer" ]; then
         export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
@@ -27,6 +29,10 @@ if [ -z "${SIMULATOR_ID}" ]; then
     exit 1
 fi
 
+echo "==> Project: ${PROJECT_PATH}"
+echo "==> Scheme: ${SCHEME}"
+echo "==> Simulator: ${SIMULATOR_ID}"
+
 cd "${PROJECT_DIR}"
 
 xcodebuild \
@@ -35,3 +41,5 @@ xcodebuild \
     -configuration Debug \
     -destination "platform=iOS Simulator,id=${SIMULATOR_ID}" \
     clean build
+
+echo "==> Build succeeded"

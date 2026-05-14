@@ -35,7 +35,8 @@ final class AuthServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(user.email, "new.user@example.com")
-        XCTAssertEqual(try await container.authService.currentUser(), user)
+        let currentUser = try await container.authService.currentUser()
+        XCTAssertEqual(currentUser, user)
     }
 
     func testLogoutClearsCurrentUser() async throws {
@@ -47,6 +48,7 @@ final class AuthServiceTests: XCTestCase {
 
         try await container.authService.logout()
 
-        XCTAssertNil(try await container.authService.currentUser())
+        let currentUser = try await container.authService.currentUser()
+        XCTAssertNil(currentUser)
     }
 }

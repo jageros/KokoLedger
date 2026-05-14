@@ -5,18 +5,22 @@ final class BookMemberServiceTests: XCTestCase {
     func testOwnerEditorReadonlyCanViewMembers() async throws {
         let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
 
-        XCTAssertFalse(try await container.bookMemberService.fetchMembers(
+        let ownerMembers = try await container.bookMemberService.fetchMembers(
             bookId: MockSeedData.primaryBookId,
             requestedBy: MockSeedData.defaultUserId
-        ).isEmpty)
-        XCTAssertFalse(try await container.bookMemberService.fetchMembers(
+        )
+        let editorMembers = try await container.bookMemberService.fetchMembers(
             bookId: MockSeedData.primaryBookId,
             requestedBy: MockSeedData.editorUserId
-        ).isEmpty)
-        XCTAssertFalse(try await container.bookMemberService.fetchMembers(
+        )
+        let readonlyMembers = try await container.bookMemberService.fetchMembers(
             bookId: MockSeedData.primaryBookId,
             requestedBy: MockSeedData.readonlyUserId
-        ).isEmpty)
+        )
+
+        XCTAssertFalse(ownerMembers.isEmpty)
+        XCTAssertFalse(editorMembers.isEmpty)
+        XCTAssertFalse(readonlyMembers.isEmpty)
     }
 
     func testNonMemberCannotViewMembers() async {

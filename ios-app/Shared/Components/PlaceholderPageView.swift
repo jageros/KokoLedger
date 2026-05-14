@@ -3,6 +3,7 @@ import SwiftUI
 struct PlaceholderPageView: View {
     let title: String
     let systemImage: String
+    var message: String? = nil
 
     var body: some View {
         VStack(spacing: AppTheme.Spacing.medium) {
@@ -14,6 +15,13 @@ struct PlaceholderPageView: View {
                 .font(.title2.weight(.semibold))
                 .foregroundStyle(.primary)
                 .multilineTextAlignment(.center)
+
+            if let message {
+                Text(message)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(AppTheme.Spacing.large)

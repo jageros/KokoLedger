@@ -81,6 +81,14 @@ enum PermissionGuard {
         try assertAllowed(canRemoveMember(userId: userId, book: book, memberRole: memberRole))
     }
 
+    static func assertCanManageBookSettings(userId: UUID, book: Book, memberRole: BookMemberRole?) throws {
+        try assertAllowed(canManageBookSettings(userId: userId, book: book, memberRole: memberRole))
+    }
+
+    static func assertCanArchiveBook(userId: UUID, book: Book, memberRole: BookMemberRole?) throws {
+        try assertAllowed(canArchiveBook(userId: userId, book: book, memberRole: memberRole))
+    }
+
     private static func canWriteTransactions(userId: UUID, book: Book, memberRole: BookMemberRole?) -> Bool {
         if isOwner(userId: userId, book: book) {
             return true

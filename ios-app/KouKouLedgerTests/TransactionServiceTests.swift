@@ -108,10 +108,70 @@ final class TransactionServiceTests: XCTestCase {
             requestedBy: MockSeedData.defaultUserId
         )
 
-        XCTAssertNil(try await container.transactionService.fetchTransaction(
+        let fetchedTransaction = try await container.transactionService.fetchTransaction(
             id: transaction.id,
             bookId: MockSeedData.primaryBookId,
             requestedBy: MockSeedData.defaultUserId
-        ))
+        )
+        XCTAssertNil(fetchedTransaction)
+
+        let fetchedTransactions = try await container.transactionService.fetchTransactions(
+            bookId: MockSeedData.primaryBookId,
+            requestedBy: MockSeedData.defaultUserId
+        )
+        XCTAssertFalse(fetchedTransactions.contains { $0.id == transaction.id })
+        XCTAssertTrue(container.store.transactions[transaction.id]?.deletedAt != nil)
+    }
+
+    func testFetchTransactionsFiltersByTimeRange() async throws {
+        let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
+        let range = DateInterval(
+            start: DateUtils.startOfToday(relativeTo: ServiceTestSupport.referenceDate),
+            end: ServiceTestSupport.referenceDate
+        )
+
+        let transactions = try await container.transactionService.fetchTransactions(
+            bookId: MockSeedData.primaryBookId,
+            requestedBy: MockSeedData.defaultUserId,
+            range: range
+        )
+
+        XCTAssertEqual(transactions.count, 1)
+        XCTAssertEqual(transactions.first?.note, "咖啡")
+    }
+
+    func testUpdateTransactionCannotChangeCreatedBy() async throws {
+        let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
+        let categories = try await ServiceTestSupport.expenseCategoryPair(container: container)
+        let transaction = try await container.transactionService.createTransaction(
+            bookId: MockSeedData.primaryBookId,
+            type: .expense,
+            amountMinor: 1200,
+            currencyCode: "CNY",
+            categoryLevel1Id: categories.parent.id,
+            categoryLevel2Id: categories.child.id,
+            occurredAt: ServiceTestSupport.referenceDate,
+            note: nil,
+            createdBy: MockSeedData.defaultUserId
+        )
+        let tampered = LedgerTransaction(
+            id: transaction.id,
+            bookId: transaction.bookId,
+            type: transaction.type,
+            amountMinor: transaction.amountMinor,
+            currencyCode: transaction.currencyCode,
+            categoryLevel1Id: transaction.categoryLevel1Id,
+            categoryLevel2Id: transaction.categoryLevel2Id,
+            occurredAt: transaction.occurredAt,
+            note: transaction.note,
+            createdBy: MockSeedData.editorUserId,
+            createdAt: transaction.createdAt,
+            updatedAt: transaction.updatedAt,
+            deletedAt: transaction.deletedAt
+        )
+
+        await XCTAssertThrowsErrorAsync {
+            _ = try await container.transactionService.updateTransaction(tampered, requestedBy: MockSeedData.defaultUserId)
+        }
     }
 }
