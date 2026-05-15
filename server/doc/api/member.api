@@ -1,0 +1,32 @@
+import "common.api"
+
+type BookMembersReq {
+	BookId string `path:"bookId"`
+}
+
+type UpdateMemberRoleReq {
+	BookId   string `path:"bookId"`
+	MemberId string `path:"memberId"`
+	Role     string `json:"role"`
+}
+
+type RemoveMemberReq {
+	BookId   string `path:"bookId"`
+	MemberId string `path:"memberId"`
+}
+
+@server (
+	group:  member
+	prefix: /books
+)
+service koko {
+	@handler ListBookMembers
+	get /:bookId/members (BookMembersReq) returns (BookMemberListResp)
+
+	@handler UpdateBookMemberRole
+	patch /:bookId/members/:memberId/role (UpdateMemberRoleReq) returns (BookMemberResp)
+
+	@handler RemoveBookMember
+	delete /:bookId/members/:memberId (RemoveMemberReq) returns (EmptyResp)
+}
+

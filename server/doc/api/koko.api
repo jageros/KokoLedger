@@ -1,0 +1,18 @@
+syntax = "v1"
+
+import "common.api"
+import "auth.api"
+import "book.api"
+import "member.api"
+import "invite.api"
+import "category.api"
+import "transaction.api"
+import "statistics.api"
+
+info (
+	title:   "KoKo Ledger API"
+	desc:    "API contract for the KouKou Ledger iOS app."
+	author:  "jager"
+	version: "v1"
+)
+

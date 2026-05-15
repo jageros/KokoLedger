@@ -1,0 +1,44 @@
+import "common.api"
+
+type CreateInviteReq {
+	BookId string `path:"bookId"`
+	Role   string `json:"role"`
+}
+
+type ListInvitesReq {
+	BookId string `path:"bookId"`
+}
+
+type AcceptInviteReq {
+	InviteCode string `path:"inviteCode"`
+}
+
+type RevokeInviteReq {
+	BookId   string `path:"bookId"`
+	InviteId string `path:"inviteId"`
+}
+
+@server (
+	group:  invite
+	prefix: /books
+)
+service koko {
+	@handler CreateBookInvite
+	post /:bookId/invites (CreateInviteReq) returns (BookInviteResp)
+
+	@handler ListBookInvites
+	get /:bookId/invites (ListInvitesReq) returns (BookInviteListResp)
+
+	@handler RevokeBookInvite
+	delete /:bookId/invites/:inviteId (RevokeInviteReq) returns (EmptyResp)
+}
+
+@server (
+	group:  invite
+	prefix: /invites
+)
+service koko {
+	@handler AcceptInvite
+	post /:inviteCode/accept (AcceptInviteReq) returns (BookMemberResp)
+}
+

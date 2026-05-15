@@ -1,0 +1,2256 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "KoKo Ledger API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "Login",
+        "operationId": "authLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "account",
+                "password"
+              ],
+              "properties": {
+                "account": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "nickname",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "avatarURL": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "nickname": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "Logout",
+        "operationId": "authLogout",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "Me",
+        "operationId": "authMe",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "nickname",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "avatarURL": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "nickname": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "Register",
+        "operationId": "authRegister",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "password",
+                "nickname"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "nickname": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "nickname",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "avatarURL": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "nickname": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ListBooks",
+        "operationId": "bookListBooks",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "name",
+                      "defaultCurrencyCode",
+                      "ownerId",
+                      "createdAt",
+                      "updatedAt"
+                    ],
+                    "properties": {
+                      "archivedAt": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "defaultCurrencyCode": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "ownerId": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "CreateBook",
+        "operationId": "bookCreateBook",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "defaultCurrencyCode"
+              ],
+              "properties": {
+                "defaultCurrencyCode": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "defaultCurrencyCode",
+                    "ownerId",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "archivedAt": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "defaultCurrencyCode": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "ownerId": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "GetBook",
+        "operationId": "bookGetBook",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "defaultCurrencyCode",
+                    "ownerId",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "archivedAt": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "defaultCurrencyCode": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "ownerId": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ArchiveBook",
+        "operationId": "bookArchiveBook",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "UpdateBook",
+        "operationId": "bookUpdateBook",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "defaultCurrencyCode"
+              ],
+              "properties": {
+                "defaultCurrencyCode": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "defaultCurrencyCode",
+                    "ownerId",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "archivedAt": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "defaultCurrencyCode": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "ownerId": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/categories": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ListCategories",
+        "operationId": "categoryListCategories",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "type",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "boolean",
+            "name": "includeArchived",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "bookId",
+                      "name",
+                      "type",
+                      "level",
+                      "sortOrder",
+                      "isArchived",
+                      "createdAt",
+                      "updatedAt"
+                    ],
+                    "properties": {
+                      "bookId": {
+                        "type": "string"
+                      },
+                      "colorHex": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "icon": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "isArchived": {
+                        "type": "boolean"
+                      },
+                      "level": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "parentId": {
+                        "type": "string"
+                      },
+                      "sortOrder": {
+                        "type": "integer"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "CreateCategory",
+        "operationId": "categoryCreateCategory",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "level"
+              ],
+              "properties": {
+                "colorHex": {
+                  "type": "string"
+                },
+                "icon": {
+                  "type": "string"
+                },
+                "level": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "parentId": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "name",
+                    "type",
+                    "level",
+                    "sortOrder",
+                    "isArchived",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "colorHex": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "icon": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "isArchived": {
+                      "type": "boolean"
+                    },
+                    "level": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "parentId": {
+                      "type": "string"
+                    },
+                    "sortOrder": {
+                      "type": "integer"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/categories/{categoryId}": {
+      "delete": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ArchiveCategory",
+        "operationId": "categoryArchiveCategory",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "categoryId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "UpdateCategory",
+        "operationId": "categoryUpdateCategory",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "categoryId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "type",
+                "level",
+                "sortOrder",
+                "isArchived"
+              ],
+              "properties": {
+                "colorHex": {
+                  "type": "string"
+                },
+                "icon": {
+                  "type": "string"
+                },
+                "isArchived": {
+                  "type": "boolean"
+                },
+                "level": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "parentId": {
+                  "type": "string"
+                },
+                "sortOrder": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "name",
+                    "type",
+                    "level",
+                    "sortOrder",
+                    "isArchived",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "colorHex": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "icon": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "isArchived": {
+                      "type": "boolean"
+                    },
+                    "level": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "parentId": {
+                      "type": "string"
+                    },
+                    "sortOrder": {
+                      "type": "integer"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/invites": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ListBookInvites",
+        "operationId": "inviteListBookInvites",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "bookId",
+                      "inviteCode",
+                      "invitedByUserId",
+                      "role",
+                      "status",
+                      "expiresAt",
+                      "createdAt"
+                    ],
+                    "properties": {
+                      "acceptedAt": {
+                        "type": "string"
+                      },
+                      "bookId": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "expiresAt": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "inviteCode": {
+                        "type": "string"
+                      },
+                      "inviteLink": {
+                        "type": "string"
+                      },
+                      "invitedByUserId": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "CreateBookInvite",
+        "operationId": "inviteCreateBookInvite",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "role"
+              ],
+              "properties": {
+                "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "inviteCode",
+                    "invitedByUserId",
+                    "role",
+                    "status",
+                    "expiresAt",
+                    "createdAt"
+                  ],
+                  "properties": {
+                    "acceptedAt": {
+                      "type": "string"
+                    },
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "expiresAt": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "inviteCode": {
+                      "type": "string"
+                    },
+                    "inviteLink": {
+                      "type": "string"
+                    },
+                    "invitedByUserId": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/invites/{inviteId}": {
+      "delete": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "RevokeBookInvite",
+        "operationId": "inviteRevokeBookInvite",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "inviteId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/members": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ListBookMembers",
+        "operationId": "memberListBookMembers",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "bookId",
+                      "userId",
+                      "role",
+                      "joinedAt"
+                    ],
+                    "properties": {
+                      "bookId": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "joinedAt": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      },
+                      "userId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/members/{memberId}": {
+      "delete": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "RemoveBookMember",
+        "operationId": "memberRemoveBookMember",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "memberId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/members/{memberId}/role": {
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "UpdateBookMemberRole",
+        "operationId": "memberUpdateBookMemberRole",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "memberId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "role"
+              ],
+              "properties": {
+                "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "userId",
+                    "role",
+                    "joinedAt"
+                  ],
+                  "properties": {
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "joinedAt": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/statistics/categories": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "GetStatisticsCategories",
+        "operationId": "statisticsGetStatisticsCategories",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "scope",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "type",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "level",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "relativeTo",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "categoryId",
+                      "categoryName",
+                      "amountMinor",
+                      "percentage"
+                    ],
+                    "properties": {
+                      "amountMinor": {
+                        "type": "integer"
+                      },
+                      "categoryId": {
+                        "type": "string"
+                      },
+                      "categoryName": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "percentage": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/statistics/snapshot": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "GetStatisticsSnapshot",
+        "operationId": "statisticsGetStatisticsSnapshot",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "scope",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "relativeTo",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "scope",
+                    "totalIncomeMinor",
+                    "incomeDelta",
+                    "totalExpenseMinor",
+                    "expenseDelta",
+                    "netAssetMinor",
+                    "averageDailyIncomeMinor",
+                    "averageDailyIncomeDelta",
+                    "averageDailyExpenseMinor",
+                    "averageDailyExpenseDelta",
+                    "currencyCode"
+                  ],
+                  "properties": {
+                    "averageDailyExpenseDelta": {
+                      "type": "object",
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "averageDailyExpenseMinor": {
+                      "type": "integer"
+                    },
+                    "averageDailyIncomeDelta": {
+                      "type": "object",
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "averageDailyIncomeMinor": {
+                      "type": "integer"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "expenseDelta": {
+                      "type": "object",
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "incomeDelta": {
+                      "type": "object",
+                      "required": [
+                        "kind"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "netAssetMinor": {
+                      "type": "integer"
+                    },
+                    "scope": {
+                      "type": "string"
+                    },
+                    "totalExpenseMinor": {
+                      "type": "integer"
+                    },
+                    "totalIncomeMinor": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/statistics/trend": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "GetStatisticsTrend",
+        "operationId": "statisticsGetStatisticsTrend",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "scope",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "relativeTo",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "date",
+                      "incomeMinor",
+                      "expenseMinor"
+                    ],
+                    "properties": {
+                      "date": {
+                        "type": "string"
+                      },
+                      "expenseMinor": {
+                        "type": "integer"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "incomeMinor": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/summary": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "GetLedgerSummary",
+        "operationId": "statisticsGetLedgerSummary",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "totalIncomeMinor",
+                    "totalExpenseMinor",
+                    "balanceMinor",
+                    "currencyCode"
+                  ],
+                  "properties": {
+                    "balanceMinor": {
+                      "type": "integer"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "totalExpenseMinor": {
+                      "type": "integer"
+                    },
+                    "totalIncomeMinor": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/transactions": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "ListTransactions",
+        "operationId": "transactionListTransactions",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "from",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "name": "to",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "bookId",
+                      "type",
+                      "amountMinor",
+                      "currencyCode",
+                      "categoryLevel1Id",
+                      "categoryLevel2Id",
+                      "occurredAt",
+                      "createdBy",
+                      "createdAt",
+                      "updatedAt"
+                    ],
+                    "properties": {
+                      "amountMinor": {
+                        "type": "integer"
+                      },
+                      "bookId": {
+                        "type": "string"
+                      },
+                      "categoryLevel1Id": {
+                        "type": "string"
+                      },
+                      "categoryLevel2Id": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "createdBy": {
+                        "type": "string"
+                      },
+                      "currencyCode": {
+                        "type": "string"
+                      },
+                      "deletedAt": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "occurredAt": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "CreateTransaction",
+        "operationId": "transactionCreateTransaction",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "type",
+                "amountMinor",
+                "currencyCode",
+                "categoryLevel1Id",
+                "categoryLevel2Id",
+                "occurredAt"
+              ],
+              "properties": {
+                "amountMinor": {
+                  "type": "integer"
+                },
+                "categoryLevel1Id": {
+                  "type": "string"
+                },
+                "categoryLevel2Id": {
+                  "type": "string"
+                },
+                "currencyCode": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "occurredAt": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "type",
+                    "amountMinor",
+                    "currencyCode",
+                    "categoryLevel1Id",
+                    "categoryLevel2Id",
+                    "occurredAt",
+                    "createdBy",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "amountMinor": {
+                      "type": "integer"
+                    },
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "categoryLevel1Id": {
+                      "type": "string"
+                    },
+                    "categoryLevel2Id": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "deletedAt": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "occurredAt": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{bookId}/transactions/{transactionId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "GetTransaction",
+        "operationId": "transactionGetTransaction",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "transactionId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "type",
+                    "amountMinor",
+                    "currencyCode",
+                    "categoryLevel1Id",
+                    "categoryLevel2Id",
+                    "occurredAt",
+                    "createdBy",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "amountMinor": {
+                      "type": "integer"
+                    },
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "categoryLevel1Id": {
+                      "type": "string"
+                    },
+                    "categoryLevel2Id": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "deletedAt": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "occurredAt": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "DeleteTransaction",
+        "operationId": "transactionDeleteTransaction",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "transactionId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "UpdateTransaction",
+        "operationId": "transactionUpdateTransaction",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "bookId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "transactionId",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "type",
+                "amountMinor",
+                "currencyCode",
+                "categoryLevel1Id",
+                "categoryLevel2Id",
+                "occurredAt"
+              ],
+              "properties": {
+                "amountMinor": {
+                  "type": "integer"
+                },
+                "categoryLevel1Id": {
+                  "type": "string"
+                },
+                "categoryLevel2Id": {
+                  "type": "string"
+                },
+                "currencyCode": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "occurredAt": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "type",
+                    "amountMinor",
+                    "currencyCode",
+                    "categoryLevel1Id",
+                    "categoryLevel2Id",
+                    "occurredAt",
+                    "createdBy",
+                    "createdAt",
+                    "updatedAt"
+                  ],
+                  "properties": {
+                    "amountMinor": {
+                      "type": "integer"
+                    },
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "categoryLevel1Id": {
+                      "type": "string"
+                    },
+                    "categoryLevel2Id": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "createdBy": {
+                      "type": "string"
+                    },
+                    "currencyCode": {
+                      "type": "string"
+                    },
+                    "deletedAt": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "occurredAt": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invites/{inviteCode}/accept": {
+      "post": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "summary": "AcceptInvite",
+        "operationId": "inviteAcceptInvite",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "inviteCode",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "bookId",
+                    "userId",
+                    "role",
+                    "joinedAt"
+                  ],
+                  "properties": {
+                    "bookId": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "joinedAt": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "userId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-date": "2026-05-15 17:20:01",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.9.2"
+}

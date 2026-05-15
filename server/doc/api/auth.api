@@ -1,0 +1,37 @@
+import "common.api"
+
+type RegisterReq {
+	Email    string `json:"email,optional"`
+	Phone    string `json:"phone,optional"`
+	Password string `json:"password"`
+	Nickname string `json:"nickname"`
+}
+
+type LoginReq {
+	Account  string `json:"account"`
+	Password string `json:"password"`
+}
+
+type LoginResp {
+	Token string `json:"token"`
+	User  User   `json:"user"`
+}
+
+@server (
+	group:  auth
+	prefix: /auth
+)
+service koko {
+	@handler Register
+	post /register (RegisterReq) returns (UserResp)
+
+	@handler Login
+	post /login (LoginReq) returns (LoginResp)
+
+	@handler Logout
+	post /logout returns (EmptyResp)
+
+	@handler Me
+	get /me returns (UserResp)
+}
+

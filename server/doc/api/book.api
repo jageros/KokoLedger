@@ -1,0 +1,40 @@
+import "common.api"
+
+type BookPathReq {
+	BookId string `path:"bookId"`
+}
+
+type CreateBookReq {
+	Name                string `json:"name"`
+	Note                string `json:"note,optional"`
+	DefaultCurrencyCode string `json:"defaultCurrencyCode"`
+}
+
+type UpdateBookReq {
+	BookId              string `path:"bookId"`
+	Name                string `json:"name"`
+	Note                string `json:"note,optional"`
+	DefaultCurrencyCode string `json:"defaultCurrencyCode"`
+}
+
+@server (
+	group:  book
+	prefix: /books
+)
+service koko {
+	@handler ListBooks
+	get / returns (BookListResp)
+
+	@handler CreateBook
+	post / (CreateBookReq) returns (BookResp)
+
+	@handler GetBook
+	get /:bookId (BookPathReq) returns (BookResp)
+
+	@handler UpdateBook
+	patch /:bookId (UpdateBookReq) returns (BookResp)
+
+	@handler ArchiveBook
+	delete /:bookId (BookPathReq) returns (EmptyResp)
+}
+

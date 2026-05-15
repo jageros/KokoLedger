@@ -1,0 +1,54 @@
+import "common.api"
+
+type ListCategoriesReq {
+	BookId          string `path:"bookId"`
+	Type            string `form:"type,optional"`
+	IncludeArchived bool   `form:"includeArchived,optional"`
+}
+
+type CreateCategoryReq {
+	BookId   string `path:"bookId"`
+	Name     string `json:"name"`
+	Type     string `json:"type,optional"`
+	Level    string `json:"level"`
+	ParentId string `json:"parentId,optional"`
+	Icon     string `json:"icon,optional"`
+	ColorHex string `json:"colorHex,optional"`
+}
+
+type UpdateCategoryReq {
+	BookId     string `path:"bookId"`
+	CategoryId string `path:"categoryId"`
+	Name       string `json:"name"`
+	Type       string `json:"type"`
+	Level      string `json:"level"`
+	ParentId   string `json:"parentId,optional"`
+	Icon       string `json:"icon,optional"`
+	ColorHex   string `json:"colorHex,optional"`
+	SortOrder  int    `json:"sortOrder"`
+	IsArchived bool   `json:"isArchived"`
+}
+
+type CategoryPathReq {
+	BookId     string `path:"bookId"`
+	CategoryId string `path:"categoryId"`
+}
+
+@server (
+	group:  category
+	prefix: /books
+)
+service koko {
+	@handler ListCategories
+	get /:bookId/categories (ListCategoriesReq) returns (TransactionCategoryListResp)
+
+	@handler CreateCategory
+	post /:bookId/categories (CreateCategoryReq) returns (TransactionCategoryResp)
+
+	@handler UpdateCategory
+	patch /:bookId/categories/:categoryId (UpdateCategoryReq) returns (TransactionCategoryResp)
+
+	@handler ArchiveCategory
+	delete /:bookId/categories/:categoryId (CategoryPathReq) returns (EmptyResp)
+}
+

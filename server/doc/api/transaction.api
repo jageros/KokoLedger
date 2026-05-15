@@ -1,0 +1,57 @@
+import "common.api"
+
+type ListTransactionsReq {
+	BookId string `path:"bookId"`
+	From   string `form:"from,optional"`
+	To     string `form:"to,optional"`
+}
+
+type TransactionPathReq {
+	BookId        string `path:"bookId"`
+	TransactionId string `path:"transactionId"`
+}
+
+type CreateTransactionReq {
+	BookId           string `path:"bookId"`
+	Type             string `json:"type"`
+	AmountMinor      int64  `json:"amountMinor"`
+	CurrencyCode     string `json:"currencyCode"`
+	CategoryLevel1Id string `json:"categoryLevel1Id"`
+	CategoryLevel2Id string `json:"categoryLevel2Id"`
+	OccurredAt       string `json:"occurredAt"`
+	Note             string `json:"note,optional"`
+}
+
+type UpdateTransactionReq {
+	BookId           string `path:"bookId"`
+	TransactionId    string `path:"transactionId"`
+	Type             string `json:"type"`
+	AmountMinor      int64  `json:"amountMinor"`
+	CurrencyCode     string `json:"currencyCode"`
+	CategoryLevel1Id string `json:"categoryLevel1Id"`
+	CategoryLevel2Id string `json:"categoryLevel2Id"`
+	OccurredAt       string `json:"occurredAt"`
+	Note             string `json:"note,optional"`
+}
+
+@server (
+	group:  transaction
+	prefix: /books
+)
+service koko {
+	@handler ListTransactions
+	get /:bookId/transactions (ListTransactionsReq) returns (LedgerTransactionListResp)
+
+	@handler CreateTransaction
+	post /:bookId/transactions (CreateTransactionReq) returns (LedgerTransactionResp)
+
+	@handler GetTransaction
+	get /:bookId/transactions/:transactionId (TransactionPathReq) returns (LedgerTransactionResp)
+
+	@handler UpdateTransaction
+	patch /:bookId/transactions/:transactionId (UpdateTransactionReq) returns (LedgerTransactionResp)
+
+	@handler DeleteTransaction
+	delete /:bookId/transactions/:transactionId (TransactionPathReq) returns (EmptyResp)
+}
+

@@ -1,0 +1,38 @@
+import "common.api"
+
+type BookStatisticsReq {
+	BookId string `path:"bookId"`
+}
+
+type StatisticsScopeReq {
+	BookId     string `path:"bookId"`
+	Scope      string `form:"scope"`
+	RelativeTo string `form:"relativeTo,optional"`
+}
+
+type StatisticsCategoriesReq {
+	BookId     string `path:"bookId"`
+	Scope      string `form:"scope"`
+	Type       string `form:"type"`
+	Level      string `form:"level"`
+	RelativeTo string `form:"relativeTo,optional"`
+}
+
+@server (
+	group:  statistics
+	prefix: /books
+)
+service koko {
+	@handler GetLedgerSummary
+	get /:bookId/summary (BookStatisticsReq) returns (LedgerSummaryResp)
+
+	@handler GetStatisticsSnapshot
+	get /:bookId/statistics/snapshot (StatisticsScopeReq) returns (StatisticsSnapshotResp)
+
+	@handler GetStatisticsTrend
+	get /:bookId/statistics/trend (StatisticsScopeReq) returns (TrendPointListResp)
+
+	@handler GetStatisticsCategories
+	get /:bookId/statistics/categories (StatisticsCategoriesReq) returns (CategoryRatioSliceListResp)
+}
+
