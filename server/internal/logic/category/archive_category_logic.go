@@ -6,6 +6,7 @@ package category
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,12 @@ func NewArchiveCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *A
 }
 
 func (l *ArchiveCategoryLogic) ArchiveCategory(req *types.CategoryPathReq) (resp *types.EmptyResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, err := shared.RequireWritable(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	if err := l.svcCtx.TransactionCategories.Archive(l.ctx, req.BookId, req.CategoryId); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.EmptyResp{}, nil
 }

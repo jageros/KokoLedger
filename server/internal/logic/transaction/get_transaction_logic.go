@@ -6,6 +6,7 @@ package transaction
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,13 @@ func NewGetTransactionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ge
 }
 
 func (l *GetTransactionLogic) GetTransaction(req *types.TransactionPathReq) (resp *types.LedgerTransactionResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, _, err := shared.RequireBookAccess(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	txn, err := l.svcCtx.LedgerTransactions.FindOneByBookID(l.ctx, req.BookId, req.TransactionId)
+	if err != nil {
+		return nil, shared.NormalizeModelErr(err)
+	}
 
-	return
+	return &types.LedgerTransactionResp{Data: shared.MapTransaction(txn)}, nil
 }

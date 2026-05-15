@@ -5,7 +5,9 @@ package statistics
 
 import (
 	"context"
+	"time"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +29,15 @@ func NewGetLedgerSummaryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *GetLedgerSummaryLogic) GetLedgerSummary(req *types.BookStatisticsReq) (resp *types.LedgerSummaryResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, _, err := shared.RequireBookAccess(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	summary, err := l.svcCtx.LedgerTransactions.Summary(l.ctx, req.BookId, zeroTime(), zeroTime())
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.LedgerSummaryResp{Data: shared.SummaryResp(summary)}, nil
 }
+
+func zeroTime() time.Time { return time.Time{} }

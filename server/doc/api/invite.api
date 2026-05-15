@@ -19,8 +19,10 @@ type RevokeInviteReq {
 }
 
 @server (
-	group:  invite
-	prefix: /books
+	group:      invite
+	prefix:     /books
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler CreateBookInvite
@@ -34,8 +36,10 @@ service koko {
 }
 
 @server (
-	group:  invite
-	prefix: /invites
+	group:      invite
+	prefix:     /invites
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler AcceptInvite

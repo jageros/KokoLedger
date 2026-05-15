@@ -6,6 +6,7 @@ package config
 import (
 	"fmt"
 
+	_ "github.com/lib/pq"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -13,6 +14,12 @@ import (
 type Config struct {
 	rest.RestConf
 	Postgres PostgresConf
+	Auth     AuthConf
+}
+
+type AuthConf struct {
+	AccessSecret string
+	AccessExpire int64
 }
 
 type PostgresConf struct {

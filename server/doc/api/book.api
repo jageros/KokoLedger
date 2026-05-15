@@ -18,8 +18,10 @@ type UpdateBookReq {
 }
 
 @server (
-	group:  book
-	prefix: /books
+	group:      book
+	prefix:     /books
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler ListBooks

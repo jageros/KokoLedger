@@ -6,8 +6,10 @@ package member
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
+	"koko/internal/utils"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +29,24 @@ func NewUpdateBookMemberRoleLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *UpdateBookMemberRoleLogic) UpdateBookMemberRole(req *types.UpdateMemberRoleReq) (resp *types.BookMemberResp, err error) {
-	// todo: add your logic here and delete this line
+	book, err := shared.RequireOwner(l.ctx, l.svcCtx, req.BookId)
+	if err != nil {
+		return nil, err
+	}
+	if err := utils.ValidateRole(req.Role); err != nil {
+		return nil, err
+	}
+	member, err := l.svcCtx.BookMembersModel.FindOneByBookIDAndMemberID(l.ctx, req.BookId, req.MemberId)
+	if err != nil {
+		return nil, shared.NormalizeModelErr(err)
+	}
+	if member.UserId == book.OwnerId {
+		return nil, shared.ErrForbidden
+	}
+	member.Role = req.Role
+	if err := l.svcCtx.BookMembersModel.Update(l.ctx, member); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.BookMemberResp{Data: shared.MapMember(member)}, nil
 }

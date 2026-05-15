@@ -6,6 +6,7 @@ package transaction
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,12 @@ func NewDeleteTransactionLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *DeleteTransactionLogic) DeleteTransaction(req *types.TransactionPathReq) (resp *types.EmptyResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, err := shared.RequireWritable(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	if err := l.svcCtx.LedgerTransactions.SoftDelete(l.ctx, req.BookId, req.TransactionId); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.EmptyResp{}, nil
 }

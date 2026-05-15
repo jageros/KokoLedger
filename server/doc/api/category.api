@@ -35,8 +35,10 @@ type CategoryPathReq {
 }
 
 @server (
-	group:  category
-	prefix: /books
+	group:      category
+	prefix:     /books
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler ListCategories

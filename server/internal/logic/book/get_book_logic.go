@@ -6,6 +6,7 @@ package book
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,10 @@ func NewGetBookLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetBookLo
 }
 
 func (l *GetBookLogic) GetBook(req *types.BookPathReq) (resp *types.BookResp, err error) {
-	// todo: add your logic here and delete this line
+	book, _, err := shared.RequireBookAccess(l.ctx, l.svcCtx, req.BookId)
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.BookResp{Data: shared.MapBook(book)}, nil
 }

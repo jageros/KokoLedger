@@ -35,8 +35,10 @@ type UpdateTransactionReq {
 }
 
 @server (
-	group:  transaction
-	prefix: /books
+	group:      transaction
+	prefix:     /books
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler ListTransactions

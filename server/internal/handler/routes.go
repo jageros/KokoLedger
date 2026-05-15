@@ -28,16 +28,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/logout",
-				Handler: auth.LogoutHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/me",
-				Handler: auth.MeHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
 				Path:    "/register",
 				Handler: auth.RegisterHandler(serverCtx),
 			},
@@ -46,169 +36,217 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/",
-				Handler: book.ListBooksHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/",
-				Handler: book.CreateBookHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId",
-				Handler: book.GetBookHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPatch,
-				Path:    "/:bookId",
-				Handler: book.UpdateBookHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/:bookId",
-				Handler: book.ArchiveBookHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/logout",
+					Handler: auth.LogoutHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/me",
+					Handler: auth.MeHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/auth"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/",
+					Handler: book.ListBooksHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/",
+					Handler: book.CreateBookHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId",
+					Handler: book.GetBookHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPatch,
+					Path:    "/:bookId",
+					Handler: book.UpdateBookHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/:bookId",
+					Handler: book.ArchiveBookHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/books"),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/categories",
-				Handler: category.ListCategoriesHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/:bookId/categories",
-				Handler: category.CreateCategoryHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPatch,
-				Path:    "/:bookId/categories/:categoryId",
-				Handler: category.UpdateCategoryHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/:bookId/categories/:categoryId",
-				Handler: category.ArchiveCategoryHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/categories",
+					Handler: category.ListCategoriesHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/:bookId/categories",
+					Handler: category.CreateCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPatch,
+					Path:    "/:bookId/categories/:categoryId",
+					Handler: category.UpdateCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/:bookId/categories/:categoryId",
+					Handler: category.ArchiveCategoryHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/books"),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/:bookId/invites",
-				Handler: invite.CreateBookInviteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/invites",
-				Handler: invite.ListBookInvitesHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/:bookId/invites/:inviteId",
-				Handler: invite.RevokeBookInviteHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/:bookId/invites",
+					Handler: invite.CreateBookInviteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/invites",
+					Handler: invite.ListBookInvitesHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/:bookId/invites/:inviteId",
+					Handler: invite.RevokeBookInviteHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/books"),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/:inviteCode/accept",
-				Handler: invite.AcceptInviteHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/:inviteCode/accept",
+					Handler: invite.AcceptInviteHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/invites"),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/members",
-				Handler: member.ListBookMembersHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/:bookId/members/:memberId",
-				Handler: member.RemoveBookMemberHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPatch,
-				Path:    "/:bookId/members/:memberId/role",
-				Handler: member.UpdateBookMemberRoleHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/members",
+					Handler: member.ListBookMembersHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/:bookId/members/:memberId",
+					Handler: member.RemoveBookMemberHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPatch,
+					Path:    "/:bookId/members/:memberId/role",
+					Handler: member.UpdateBookMemberRoleHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/books"),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/statistics/categories",
-				Handler: statistics.GetStatisticsCategoriesHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/statistics/snapshot",
-				Handler: statistics.GetStatisticsSnapshotHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/statistics/trend",
-				Handler: statistics.GetStatisticsTrendHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/summary",
-				Handler: statistics.GetLedgerSummaryHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/statistics/categories",
+					Handler: statistics.GetStatisticsCategoriesHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/statistics/snapshot",
+					Handler: statistics.GetStatisticsSnapshotHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/statistics/trend",
+					Handler: statistics.GetStatisticsTrendHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/summary",
+					Handler: statistics.GetLedgerSummaryHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/books"),
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/transactions",
-				Handler: transaction.ListTransactionsHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/:bookId/transactions",
-				Handler: transaction.CreateTransactionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/:bookId/transactions/:transactionId",
-				Handler: transaction.GetTransactionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPatch,
-				Path:    "/:bookId/transactions/:transactionId",
-				Handler: transaction.UpdateTransactionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodDelete,
-				Path:    "/:bookId/transactions/:transactionId",
-				Handler: transaction.DeleteTransactionHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.SessionAuth},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/transactions",
+					Handler: transaction.ListTransactionsHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/:bookId/transactions",
+					Handler: transaction.CreateTransactionHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:bookId/transactions/:transactionId",
+					Handler: transaction.GetTransactionHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPatch,
+					Path:    "/:bookId/transactions/:transactionId",
+					Handler: transaction.UpdateTransactionHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodDelete,
+					Path:    "/:bookId/transactions/:transactionId",
+					Handler: transaction.DeleteTransactionHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/books"),
 	)
 }

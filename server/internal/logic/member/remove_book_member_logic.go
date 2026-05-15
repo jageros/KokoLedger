@@ -6,6 +6,7 @@ package member
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,20 @@ func NewRemoveBookMemberLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *RemoveBookMemberLogic) RemoveBookMember(req *types.RemoveMemberReq) (resp *types.EmptyResp, err error) {
-	// todo: add your logic here and delete this line
+	book, err := shared.RequireOwner(l.ctx, l.svcCtx, req.BookId)
+	if err != nil {
+		return nil, err
+	}
+	member, err := l.svcCtx.BookMembersModel.FindOneByBookIDAndMemberID(l.ctx, req.BookId, req.MemberId)
+	if err != nil {
+		return nil, shared.NormalizeModelErr(err)
+	}
+	if member.UserId == book.OwnerId {
+		return nil, shared.ErrForbidden
+	}
+	if err := l.svcCtx.BookMembersModel.Delete(l.ctx, member.Id); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.EmptyResp{}, nil
 }

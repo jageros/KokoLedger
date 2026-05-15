@@ -6,6 +6,7 @@ package book
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,12 @@ func NewArchiveBookLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Archi
 }
 
 func (l *ArchiveBookLogic) ArchiveBook(req *types.BookPathReq) (resp *types.EmptyResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, err := shared.RequireOwner(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	if err := l.svcCtx.BooksModel.Archive(l.ctx, req.BookId); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.EmptyResp{}, nil
 }

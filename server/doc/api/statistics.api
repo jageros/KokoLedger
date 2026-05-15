@@ -19,8 +19,10 @@ type StatisticsCategoriesReq {
 }
 
 @server (
-	group:  statistics
-	prefix: /books
+	group:      statistics
+	prefix:     /books
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler GetLedgerSummary

@@ -6,6 +6,7 @@ package auth
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,13 @@ func NewLogoutLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LogoutLogi
 }
 
 func (l *LogoutLogic) Logout() (resp *types.EmptyResp, err error) {
-	// todo: add your logic here and delete this line
+	sessionID, err := shared.CurrentSessionID(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	if err := l.svcCtx.AuthSessionsModel.Revoke(l.ctx, sessionID); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.EmptyResp{}, nil
 }

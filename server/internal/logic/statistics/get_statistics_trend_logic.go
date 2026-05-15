@@ -6,8 +6,10 @@ package statistics
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
+	"koko/internal/utils"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +29,27 @@ func NewGetStatisticsTrendLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *GetStatisticsTrendLogic) GetStatisticsTrend(req *types.StatisticsScopeReq) (resp *types.TrendPointListResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, _, err := shared.RequireBookAccess(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	start, end, err := utils.ScopeRange(req.Scope, req.RelativeTo)
+	if err != nil {
+		return nil, err
+	}
+	points, err := l.svcCtx.LedgerTransactions.Trend(l.ctx, req.BookId, start, end)
+	if err != nil {
+		return nil, err
+	}
+	data := make([]types.TrendPoint, 0, len(points))
+	for _, point := range points {
+		date := point.Date.Format("2006-01-02")
+		data = append(data, types.TrendPoint{
+			Id:           date,
+			Date:         date,
+			IncomeMinor:  point.IncomeMinor,
+			ExpenseMinor: point.ExpenseMinor,
+		})
+	}
 
-	return
+	return &types.TrendPointListResp{Data: data}, nil
 }

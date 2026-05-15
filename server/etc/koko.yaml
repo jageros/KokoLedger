@@ -1,3 +1,11 @@
 Name: koko
 Host: 0.0.0.0
 Port: 8888
+Postgres:
+  Addr: 127.0.0.1:5432
+  Database: koko
+  User: biroot
+  Password: "123456"
+Auth:
+  AccessSecret: "change-me-in-production"
+  AccessExpire: 604800

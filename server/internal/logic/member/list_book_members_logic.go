@@ -6,6 +6,7 @@ package member
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,17 @@ func NewListBookMembersLogic(ctx context.Context, svcCtx *svc.ServiceContext) *L
 }
 
 func (l *ListBookMembersLogic) ListBookMembers(req *types.BookMembersReq) (resp *types.BookMemberListResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, _, err := shared.RequireBookAccess(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	members, err := l.svcCtx.BookMembersModel.FindManyByBookID(l.ctx, req.BookId)
+	if err != nil {
+		return nil, err
+	}
+	data := make([]types.BookMember, 0, len(members))
+	for _, member := range members {
+		data = append(data, shared.MapMember(member))
+	}
 
-	return
+	return &types.BookMemberListResp{Data: data}, nil
 }

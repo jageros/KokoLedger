@@ -16,8 +16,10 @@ type RemoveMemberReq {
 }
 
 @server (
-	group:  member
-	prefix: /books
+	group:      member
+	prefix:     /books
+	jwt:        Auth
+	middleware: SessionAuth
 )
 service koko {
 	@handler ListBookMembers

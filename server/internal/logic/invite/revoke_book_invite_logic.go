@@ -6,6 +6,7 @@ package invite
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,12 @@ func NewRevokeBookInviteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *RevokeBookInviteLogic) RevokeBookInvite(req *types.RevokeInviteReq) (resp *types.EmptyResp, err error) {
-	// todo: add your logic here and delete this line
+	if _, err := shared.RequireOwner(l.ctx, l.svcCtx, req.BookId); err != nil {
+		return nil, err
+	}
+	if err := l.svcCtx.BookInvitesModel.Revoke(l.ctx, req.BookId, req.InviteId); err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.EmptyResp{}, nil
 }

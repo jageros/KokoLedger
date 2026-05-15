@@ -6,6 +6,7 @@ package book
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,18 @@ func NewListBooksLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListBoo
 }
 
 func (l *ListBooksLogic) ListBooks() (resp *types.BookListResp, err error) {
-	// todo: add your logic here and delete this line
+	userID, err := shared.CurrentUserID(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	books, err := l.svcCtx.BooksModel.FindAccessible(l.ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+	data := make([]types.Book, 0, len(books))
+	for _, book := range books {
+		data = append(data, shared.MapBook(book))
+	}
 
-	return
+	return &types.BookListResp{Data: data}, nil
 }

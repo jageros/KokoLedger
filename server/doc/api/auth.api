@@ -27,7 +27,15 @@ service koko {
 
 	@handler Login
 	post /login (LoginReq) returns (LoginResp)
+}
 
+@server (
+	group:      auth
+	prefix:     /auth
+	jwt:        Auth
+	middleware: SessionAuth
+)
+service koko {
 	@handler Logout
 	post /logout returns (EmptyResp)
 

@@ -6,6 +6,7 @@ package auth
 import (
 	"context"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
 
@@ -27,7 +28,14 @@ func NewMeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *MeLogic {
 }
 
 func (l *MeLogic) Me() (resp *types.UserResp, err error) {
-	// todo: add your logic here and delete this line
+	userID, err := shared.CurrentUserID(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	user, err := l.svcCtx.UsersModel.FindOne(l.ctx, userID)
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.UserResp{Data: shared.MapUser(user)}, nil
 }

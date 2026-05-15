@@ -5,9 +5,12 @@ package book
 
 import (
 	"context"
+	"errors"
 
+	"koko/internal/logic/shared"
 	"koko/internal/svc"
 	"koko/internal/types"
+	"koko/internal/utils"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +30,28 @@ func NewUpdateBookLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 }
 
 func (l *UpdateBookLogic) UpdateBook(req *types.UpdateBookReq) (resp *types.BookResp, err error) {
-	// todo: add your logic here and delete this line
+	book, err := shared.RequireOwner(l.ctx, l.svcCtx, req.BookId)
+	if err != nil {
+		return nil, err
+	}
+	name := utils.Clean(req.Name)
+	if name == "" {
+		return nil, errors.New("name is required")
+	}
+	currency := utils.NormalizeCurrency(req.DefaultCurrencyCode)
+	if err := utils.ValidateCurrency(currency); err != nil {
+		return nil, err
+	}
+	book.Name = name
+	book.Note = shared.NullString(req.Note)
+	book.DefaultCurrencyCode = currency
+	if err := l.svcCtx.BooksModel.Update(l.ctx, book); err != nil {
+		return nil, err
+	}
+	book, err = l.svcCtx.BooksModel.FindOne(l.ctx, book.Id)
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.BookResp{Data: shared.MapBook(book)}, nil
 }
