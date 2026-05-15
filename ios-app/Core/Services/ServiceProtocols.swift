@@ -30,7 +30,7 @@ protocol BookMemberServiceProtocol {
 protocol BookInviteServiceProtocol {
     func createInvite(bookId: UUID, role: BookMemberRole, requestedBy userId: UUID) async throws -> BookInvite
     func acceptInvite(inviteCode: String, userId: UUID) async throws -> BookMember
-    func revokeInvite(inviteId: UUID, requestedBy userId: UUID) async throws
+    func revokeInvite(bookId: UUID, inviteId: UUID, requestedBy userId: UUID) async throws
 }
 
 protocol CategoryServiceProtocol {

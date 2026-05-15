@@ -99,7 +99,7 @@ final class MembersViewModel: ObservableObject {
             return
         }
         do {
-            try await inviteRepository.revokeInvite(inviteId: invite.id, requestedBy: userId)
+            try await inviteRepository.revokeInvite(bookId: invite.bookId, inviteId: invite.id, requestedBy: userId)
             createdInvite = nil
         } catch {
             alertMessage = message(for: error)

@@ -25,17 +25,21 @@ final class AppDependencyContainer {
 
     init(
         referenceDate: Date = Date(),
-        backendMode: BackendMode = .mock,
-        baseURL: URL = URL(string: "https://api.koukou.local")!,
+        backendMode: BackendMode? = nil,
+        baseURL: URL? = BackendConfiguration.configuredAPIBaseURL(),
         authTokenStore: AuthTokenStore = AuthTokenStore(),
         localCacheService: LocalCacheServiceProtocol = SwiftDataLocalCacheService()
     ) {
-        self.backendMode = backendMode
         self.authTokenStore = authTokenStore
         self.localCacheService = localCacheService
 
         let store = MockDataStore(referenceDate: referenceDate)
         self.store = store
+        var resolvedBackendMode = backendMode ?? (baseURL == nil ? .mock : .remote)
+        if resolvedBackendMode == .remote, baseURL == nil {
+            resolvedBackendMode = .mock
+        }
+        self.backendMode = resolvedBackendMode
 
         let authService: AuthServiceProtocol
         let bookService: BookServiceProtocol
@@ -45,7 +49,7 @@ final class AppDependencyContainer {
         let transactionService: TransactionServiceProtocol
         let statisticsService: StatisticsServiceProtocol
 
-        switch backendMode {
+        switch resolvedBackendMode {
         case .mock:
             apiClient = nil
             authService = MockAuthService(store: store)
@@ -56,6 +60,7 @@ final class AppDependencyContainer {
             transactionService = MockTransactionService(store: store)
             statisticsService = MockStatisticsService(store: store)
         case .remote:
+            let baseURL = baseURL!
             let apiClient = APIClient(
                 baseURL: baseURL,
                 authTokenProvider: {
@@ -63,7 +68,7 @@ final class AppDependencyContainer {
                 }
             )
             self.apiClient = apiClient
-            authService = RemoteAuthService(apiClient: apiClient)
+            authService = RemoteAuthService(apiClient: apiClient, authTokenStore: authTokenStore)
             bookService = RemoteBookService(apiClient: apiClient)
             bookMemberService = RemoteBookMemberService(apiClient: apiClient)
             bookInviteService = RemoteBookInviteService(apiClient: apiClient)

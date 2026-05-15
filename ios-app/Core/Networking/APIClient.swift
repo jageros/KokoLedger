@@ -138,3 +138,47 @@ final class APIClient {
 
     private struct EmptyRequestBody: Encodable {}
 }
+
+struct DataResponse<Value: Decodable>: Decodable {
+    let data: Value
+}
+
+struct EmptyAPIResponse: Decodable {}
+
+enum RemoteDateCoding {
+    static let iso8601: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
+
+    static let fallbackISO8601: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        return formatter
+    }()
+
+    static let dateOnly: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    static func string(from date: Date) -> String {
+        fallbackISO8601.string(from: date)
+    }
+
+    static func date(from value: String) throws -> Date {
+        if let date = iso8601.date(from: value) ?? fallbackISO8601.date(from: value) ?? dateOnly.date(from: value) {
+            return date
+        }
+        throw APIError.decodingFailed(
+            DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: [], debugDescription: "Invalid remote date: \(value)")
+            )
+        )
+    }
+}

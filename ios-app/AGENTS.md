@@ -15,7 +15,7 @@
 10. 金额不能使用 Double 存储，必须使用 Int64 amountMinor。
 11. 百分比、图表占比可以使用 Double，但不能作为金额存储。
 12. 所有 Service 必须通过 Protocol 抽象，方便后续替换真实后端。
-13. 当前阶段先使用 Mock Service，后续预留 Remote Service。
+13. 默认未配置服务端地址时使用 Mock Service；配置 `KOUKOU_API_BASE_URL` 后使用 Remote Service。
 14. 每完成一个阶段必须运行 xcodebuild build。
 15. 如果有测试，必须运行 xcodebuild test。
 16. 不允许把大量代码写进一个文件。

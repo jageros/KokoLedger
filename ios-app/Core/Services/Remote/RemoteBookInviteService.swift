@@ -8,19 +8,23 @@ final class RemoteBookInviteService: BookInviteServiceProtocol {
     }
 
     func createInvite(bookId: UUID, role: BookMemberRole, requestedBy userId: UUID) async throws -> BookInvite {
-        throw unavailable()
+        let response: DataResponse<BookInvite> = try await apiClient.post(
+            .createInvite(bookId: bookId),
+            body: CreateInviteRequest(role: role.rawValue)
+        )
+        return response.data
     }
 
     func acceptInvite(inviteCode: String, userId: UUID) async throws -> BookMember {
-        throw unavailable()
+        let response: DataResponse<BookMember> = try await apiClient.request(.acceptInvite(inviteCode: inviteCode))
+        return response.data
     }
 
-    func revokeInvite(inviteId: UUID, requestedBy userId: UUID) async throws {
-        throw unavailable()
+    func revokeInvite(bookId: UUID, inviteId: UUID, requestedBy userId: UUID) async throws {
+        let _: EmptyAPIResponse = try await apiClient.delete(.deleteInvite(bookId: bookId, inviteId: inviteId))
     }
+}
 
-    private func unavailable() -> AppError {
-        _ = apiClient
-        return .network
-    }
+private struct CreateInviteRequest: Encodable {
+    let role: String
 }

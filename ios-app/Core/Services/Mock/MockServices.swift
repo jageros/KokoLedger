@@ -307,9 +307,10 @@ final class MockBookInviteService: BookInviteServiceProtocol {
         return member
     }
 
-    func revokeInvite(inviteId: UUID, requestedBy userId: UUID) async throws {
+    func revokeInvite(bookId: UUID, inviteId: UUID, requestedBy userId: UUID) async throws {
         guard let invite = store.invites[inviteId],
-              let book = store.book(id: invite.bookId) else {
+              invite.bookId == bookId,
+              let book = store.book(id: bookId) else {
             throw AppError.data
         }
         try PermissionGuard.assertCanInviteMember(

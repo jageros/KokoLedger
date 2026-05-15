@@ -96,8 +96,8 @@ final class BookInviteRepository {
         try await service.acceptInvite(inviteCode: inviteCode, userId: userId)
     }
 
-    func revokeInvite(inviteId: UUID, requestedBy userId: UUID) async throws {
-        try await service.revokeInvite(inviteId: inviteId, requestedBy: userId)
+    func revokeInvite(bookId: UUID, inviteId: UUID, requestedBy userId: UUID) async throws {
+        try await service.revokeInvite(bookId: bookId, inviteId: inviteId, requestedBy: userId)
     }
 }
 

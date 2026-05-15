@@ -68,8 +68,15 @@ extension APIEndpoint {
         APIEndpoint(method: .delete, path: "/books/\(bookId.uuidString)/invites/\(inviteId.uuidString)")
     }
 
-    static func categories(bookId: UUID) -> APIEndpoint {
-        APIEndpoint(method: .get, path: "/books/\(bookId.uuidString)/categories")
+    static func categories(bookId: UUID, type: TransactionType? = nil, includeArchived: Bool = false) -> APIEndpoint {
+        var queryItems: [URLQueryItem] = []
+        if let type {
+            queryItems.append(URLQueryItem(name: "type", value: type.rawValue))
+        }
+        if includeArchived {
+            queryItems.append(URLQueryItem(name: "includeArchived", value: "true"))
+        }
+        return APIEndpoint(method: .get, path: "/books/\(bookId.uuidString)/categories", queryItems: queryItems)
     }
 
     static func createCategory(bookId: UUID) -> APIEndpoint {
@@ -108,6 +115,10 @@ extension APIEndpoint {
         APIEndpoint(method: .patch, path: "/books/\(bookId.uuidString)/transactions/\(transactionId.uuidString)")
     }
 
+    static func transaction(bookId: UUID, transactionId: UUID) -> APIEndpoint {
+        APIEndpoint(method: .get, path: "/books/\(bookId.uuidString)/transactions/\(transactionId.uuidString)")
+    }
+
     static func deleteTransaction(bookId: UUID, transactionId: UUID) -> APIEndpoint {
         APIEndpoint(method: .delete, path: "/books/\(bookId.uuidString)/transactions/\(transactionId.uuidString)")
     }
@@ -116,19 +127,27 @@ extension APIEndpoint {
         APIEndpoint(method: .get, path: "/books/\(bookId.uuidString)/summary")
     }
 
-    static func statisticsSnapshot(bookId: UUID, scope: StatisticsTimeScope) -> APIEndpoint {
+    static func statisticsSnapshot(bookId: UUID, scope: StatisticsTimeScope, relativeTo: String? = nil) -> APIEndpoint {
+        var queryItems = [URLQueryItem(name: "scope", value: scope.rawValue)]
+        if let relativeTo {
+            queryItems.append(URLQueryItem(name: "relativeTo", value: relativeTo))
+        }
         APIEndpoint(
             method: .get,
             path: "/books/\(bookId.uuidString)/statistics/snapshot",
-            queryItems: [URLQueryItem(name: "scope", value: scope.rawValue)]
+            queryItems: queryItems
         )
     }
 
-    static func statisticsTrend(bookId: UUID, scope: StatisticsTimeScope) -> APIEndpoint {
+    static func statisticsTrend(bookId: UUID, scope: StatisticsTimeScope, relativeTo: String? = nil) -> APIEndpoint {
+        var queryItems = [URLQueryItem(name: "scope", value: scope.rawValue)]
+        if let relativeTo {
+            queryItems.append(URLQueryItem(name: "relativeTo", value: relativeTo))
+        }
         APIEndpoint(
             method: .get,
             path: "/books/\(bookId.uuidString)/statistics/trend",
-            queryItems: [URLQueryItem(name: "scope", value: scope.rawValue)]
+            queryItems: queryItems
         )
     }
 
@@ -136,16 +155,21 @@ extension APIEndpoint {
         bookId: UUID,
         scope: StatisticsTimeScope,
         type: TransactionType,
-        level: CategoryLevel
+        level: CategoryLevel,
+        relativeTo: String? = nil
     ) -> APIEndpoint {
+        var queryItems = [
+            URLQueryItem(name: "scope", value: scope.rawValue),
+            URLQueryItem(name: "type", value: type.rawValue),
+            URLQueryItem(name: "level", value: level.rawValue)
+        ]
+        if let relativeTo {
+            queryItems.append(URLQueryItem(name: "relativeTo", value: relativeTo))
+        }
         APIEndpoint(
             method: .get,
             path: "/books/\(bookId.uuidString)/statistics/categories",
-            queryItems: [
-                URLQueryItem(name: "scope", value: scope.rawValue),
-                URLQueryItem(name: "type", value: type.rawValue),
-                URLQueryItem(name: "level", value: level.rawValue)
-            ]
+            queryItems: queryItems
         )
     }
 }

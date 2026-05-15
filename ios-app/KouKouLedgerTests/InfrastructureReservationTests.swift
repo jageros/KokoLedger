@@ -2,6 +2,11 @@ import XCTest
 @testable import KouKouLedger
 
 final class InfrastructureReservationTests: XCTestCase {
+    override func tearDown() {
+        MockURLProtocol.handler = nil
+        super.tearDown()
+    }
+
     func testDependencyContainerDefaultsToMockMode() {
         let container = AppDependencyContainer(referenceDate: ServiceTestSupport.referenceDate)
 
@@ -10,10 +15,9 @@ final class InfrastructureReservationTests: XCTestCase {
         XCTAssertNil(container.apiClient)
     }
 
-    func testDependencyContainerCanCreateRemoteModeServices() {
+    func testDependencyContainerAutomaticallyUsesRemoteWhenBaseURLIsConfigured() {
         let container = AppDependencyContainer(
             referenceDate: ServiceTestSupport.referenceDate,
-            backendMode: .remote,
             baseURL: URL(string: "https://api.koukou.test")!
         )
 
@@ -28,12 +32,40 @@ final class InfrastructureReservationTests: XCTestCase {
         XCTAssertNotNil(container.apiClient)
     }
 
-    func testRemoteServicesThrowNetworkUntilBackendIsConfigured() async {
-        let container = AppDependencyContainer(backendMode: .remote)
+    func testDependencyContainerExplicitMockOverridesConfiguredBaseURL() {
+        let container = AppDependencyContainer(
+            referenceDate: ServiceTestSupport.referenceDate,
+            backendMode: .mock,
+            baseURL: URL(string: "https://api.koukou.test")!
+        )
 
-        await XCTAssertThrowsErrorAsync {
-            _ = try await container.authService.currentUser()
-        }
+        XCTAssertEqual(container.backendMode, .mock)
+        XCTAssertTrue(container.authService is MockAuthService)
+        XCTAssertNil(container.apiClient)
+    }
+
+    func testDependencyContainerExplicitRemoteUsesConfiguredBaseURL() {
+        let container = AppDependencyContainer(
+            referenceDate: ServiceTestSupport.referenceDate,
+            backendMode: .remote,
+            baseURL: URL(string: "https://api.koukou.test")!
+        )
+
+        XCTAssertEqual(container.backendMode, .remote)
+        XCTAssertTrue(container.authService is RemoteAuthService)
+        XCTAssertEqual(container.apiClient?.baseURL.absoluteString, "https://api.koukou.test")
+    }
+
+    func testBackendConfigurationParsesOptionalBaseURL() {
+        XCTAssertNil(BackendConfiguration.normalizedURL(from: nil))
+        XCTAssertNil(BackendConfiguration.normalizedURL(from: ""))
+        XCTAssertNil(BackendConfiguration.normalizedURL(from: "   "))
+        XCTAssertNil(BackendConfiguration.normalizedURL(from: "not a url"))
+        XCTAssertNil(BackendConfiguration.normalizedURL(from: "ftp://api.koukou.test"))
+        XCTAssertEqual(
+            BackendConfiguration.normalizedURL(from: " https://api.koukou.test/v1 ")?.absoluteString,
+            "https://api.koukou.test/v1"
+        )
     }
 
     func testAPIEndpointDefinitions() {
@@ -54,10 +86,15 @@ final class InfrastructureReservationTests: XCTestCase {
             bookId: bookId,
             scope: .thisMonth,
             type: .expense,
-            level: .level2
+            level: .level2,
+            relativeTo: "2026-05-14T00:00:00Z"
         )
         XCTAssertEqual(categoryStats.path, "/books/\(bookId.uuidString)/statistics/categories")
-        XCTAssertEqual(categoryStats.queryItems.map(\.name), ["scope", "type", "level"])
+        XCTAssertEqual(categoryStats.queryItems.map(\.name), ["scope", "type", "level", "relativeTo"])
+
+        let categories = APIEndpoint.categories(bookId: bookId, type: .expense, includeArchived: true)
+        XCTAssertEqual(categories.queryItems.map(\.name), ["type", "includeArchived"])
+        XCTAssertEqual(APIEndpoint.transaction(bookId: bookId, transactionId: transactionId).method, .get)
     }
 
     func testAPIClientBuildsAuthorizationHeaderAndJSONBody() async throws {
@@ -91,6 +128,108 @@ final class InfrastructureReservationTests: XCTestCase {
 
         store.clearToken()
         XCTAssertNil(store.loadToken())
+    }
+
+    func testRemoteAuthLoginSavesTokenAndCurrentUserReturnsNilOnUnauthorized() async throws {
+        let tokenStore = AuthTokenStore()
+        let service = RemoteAuthService(apiClient: mockedClient(), authTokenStore: tokenStore)
+
+        MockURLProtocol.handler = { request in
+            if request.url?.path == "/auth/login" {
+                return httpResponse(
+                    statusCode: 200,
+                    url: request.url!,
+                    body: """
+                    {
+                      "token": "remote-token",
+                      "user": {
+                        "id": "00000000-0000-0000-0000-00000000A001",
+                        "nickname": "Owner",
+                        "email": "owner@koukou.local",
+                        "createdAt": "2026-05-14T00:00:00Z",
+                        "updatedAt": "2026-05-14T00:00:00Z"
+                      }
+                    }
+                    """
+                )
+            }
+            return httpResponse(statusCode: 401, url: request.url!, body: "{}")
+        }
+
+        let user = try await service.login(account: "owner@koukou.local", password: "password123")
+        XCTAssertEqual(user.email, "owner@koukou.local")
+        XCTAssertEqual(tokenStore.loadToken(), "remote-token")
+        let current = try await service.currentUser()
+        XCTAssertNil(current)
+    }
+
+    func testRemoteStatisticsMapsServerDeltaAndDateOnlyTrendPoint() async throws {
+        let service = RemoteStatisticsService(apiClient: mockedClient())
+        let bookId = UUID(uuidString: "00000000-0000-0000-0000-00000000B001")!
+        var requestedPaths: [String] = []
+
+        MockURLProtocol.handler = { request in
+            requestedPaths.append(request.url?.absoluteString ?? "")
+            if request.url?.path.hasSuffix("/statistics/snapshot") == true {
+                return httpResponse(
+                    statusCode: 200,
+                    url: request.url!,
+                    body: """
+                    {
+                      "data": {
+                        "scope": "thisMonth",
+                        "totalIncomeMinor": 120000,
+                        "incomeDelta": { "kind": "percent", "value": 0.2 },
+                        "totalExpenseMinor": 60000,
+                        "expenseDelta": { "kind": "flat" },
+                        "netAssetMinor": 60000,
+                        "averageDailyIncomeMinor": 4000,
+                        "averageDailyIncomeDelta": { "kind": "new" },
+                        "averageDailyExpenseMinor": 2000,
+                        "averageDailyExpenseDelta": { "kind": "percent", "value": -0.1 },
+                        "currencyCode": "CNY"
+                      }
+                    }
+                    """
+                )
+            }
+            return httpResponse(
+                statusCode: 200,
+                url: request.url!,
+                body: """
+                {
+                  "data": [
+                    {
+                      "id": "2026-05-14",
+                      "date": "2026-05-14",
+                      "incomeMinor": 120000,
+                      "expenseMinor": 60000
+                    }
+                  ]
+                }
+                """
+            )
+        }
+
+        let snapshot = try await service.statisticsSnapshot(
+            bookId: bookId,
+            scope: .thisMonth,
+            relativeTo: ServiceTestSupport.referenceDate,
+            requestedBy: MockSeedData.defaultUserId
+        )
+        XCTAssertEqual(snapshot.incomeDelta, .increased(20))
+        XCTAssertEqual(snapshot.expenseDelta, .unchanged)
+        XCTAssertEqual(snapshot.averageDailyIncomeDelta, .unavailable)
+        XCTAssertEqual(snapshot.averageDailyExpenseDelta, .decreased(10))
+
+        let trend = try await service.trendPoints(
+            bookId: bookId,
+            scope: .thisMonth,
+            relativeTo: ServiceTestSupport.referenceDate,
+            requestedBy: MockSeedData.defaultUserId
+        )
+        XCTAssertEqual(trend.first?.date, RemoteDateCoding.dateOnly.date(from: "2026-05-14"))
+        XCTAssertTrue(requestedPaths.allSatisfy { $0.contains("relativeTo=") })
     }
 
     func testSwiftDataLocalCacheServiceStoresBooksAndTransactions() async throws {
@@ -135,4 +274,55 @@ final class InfrastructureReservationTests: XCTestCase {
         XCTAssertTrue(booksAfterClear.isEmpty)
         XCTAssertTrue(transactionsAfterClear.isEmpty)
     }
+}
+
+private final class MockURLProtocol: URLProtocol {
+    static var handler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        request
+    }
+
+    override func startLoading() {
+        guard let handler = Self.handler else {
+            client?.urlProtocol(self, didFailWithError: APIError.unknown)
+            return
+        }
+        do {
+            let (response, data) = try handler(request)
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: data)
+            client?.urlProtocolDidFinishLoading(self)
+        } catch {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+    }
+
+    override func stopLoading() {}
+}
+
+private func mockedClient(token: String? = nil) -> APIClient {
+    let configuration = URLSessionConfiguration.ephemeral
+    configuration.protocolClasses = [MockURLProtocol.self]
+    return APIClient(
+        baseURL: URL(string: "https://api.koukou.test")!,
+        session: URLSession(configuration: configuration),
+        authTokenProvider: { token }
+    )
+}
+
+private func httpResponse(statusCode: Int, url: URL, body: String) -> (HTTPURLResponse, Data) {
+    (
+        HTTPURLResponse(
+            url: url,
+            statusCode: statusCode,
+            httpVersion: nil,
+            headerFields: ["Content-Type": "application/json"]
+        )!,
+        Data(body.utf8)
+    )
 }

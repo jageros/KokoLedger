@@ -65,6 +65,7 @@ final class BookInviteServiceTests: XCTestCase {
             requestedBy: MockSeedData.defaultUserId
         )
         try await container.bookInviteService.revokeInvite(
+            bookId: invite.bookId,
             inviteId: invite.id,
             requestedBy: MockSeedData.defaultUserId
         )
